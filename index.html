@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Divyanshu Sood — spatial energy systems research</title>
+<meta name="description" content="Divyanshu Sood is an energy systems researcher at University College Dublin working on where electrification lands on the distribution network, and what that means for planning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head><body>
+
+<header id="hero">
+  <svg id="voronoi" aria-hidden="true"></svg>
+  <div class="hero-in">
+    <h1>Divyanshu Sood</h1>
+    <p>I work out where electrification actually lands. Not how much electricity a country will
+       need, but which transformer districts reach their limit first, which are ageing thermally,
+       and what a planner should do about it.</p>
+    <div class="hero-where">
+      <b>Senior Energy Systems Researcher</b>, UCD Energy Institute &nbsp;·&nbsp;
+      <b>Module Coordinator</b>, Energy Systems in Buildings II &nbsp;·&nbsp;
+      <b>Data Theme Lead</b>, NexSys
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+<nav aria-label="Sections"><ol>
+  <li><button data-go="overview">Overview</button></li>
+  <li><button data-go="research">Research</button></li>
+  <li><button data-go="publications">Publications</button></li>
+  <li><button data-go="teaching">Teaching</button></li>
+  <li><button data-go="graph">Knowledge graph</button></li>
+  <li><button data-go="about">Positions &amp; contact</button></li>
+</ol></nav>
+
+<main>
+
+<section id="overview" class="on" tabindex="-1">
+  <h2>Overview</h2>
+  <p class="lede">A mechanical engineer working on energy systems at national scale. I build
+  spatially explicit models of the Irish building stock and the electricity network it loads,
+  train and test the machine learning that runs on them, and teach the thermodynamics and fluid
+  mechanics underneath.</p>
+
+  <p>The thread through everything is the gap between a national target and a local consequence.
+  Every heat pump and every car charger connects to a low-voltage network that was designed for
+  neither. Planning runs on national totals, so the question of which transformer fails first,
+  in which settlement, went unanswered. Most of my work is some version of answering it.</p>
+
+  <p>The second thread is whether a model deserves to be believed. A model that informs a
+  statutory decision carries a different burden from one that produces a figure for a paper, and
+  much of my recent work is about establishing where that burden is and is not met.</p>
+
+  <ul class="tags">
+    <li class="tag">Distribution network modelling</li><li class="tag">Machine learning</li>
+    <li class="tag">Building stock analysis</li><li class="tag">Spatial methods</li>
+    <li class="tag">Model validation</li><li class="tag">Python</li>
+  </ul>
+</section>
+
+<section id="research" tabindex="-1">
+  <h2>Research</h2>
+
+  <h3>National Energy Digital Twin</h3>
+  <p>A spatially explicit model linking Irish dwellings to the low-voltage transformer districts
+  that serve them, assembled from census small-area statistics, the national building energy
+  rating register, address data and network asset records. A user sets retrofit, heat pump,
+  electric vehicle and rooftop solar uptake and sees which districts breach capacity, which
+  transformers are ageing thermally rather than briefly peaking, which technology caused each
+  breach, and how heat demand density shifts. The output is a ranked reinforcement list rather
+  than a national demand curve. I lead the modelling.</p>
+  <div class="find"><b>Method.</b> Assigning each dwelling to the transformer minimising distance
+  divided by the square root of rated capacity, with concave-hull catchment boundaries, cut
+  spurious overload artefacts by 71 per cent against nearest-station assignment and eliminated
+  every case above 1000 per cent utilisation.</div>
+
+  <h3>Whether a learned model can be trusted on a real network</h3>
+  <p>A benchmark for transformer overload screening across 36,997 stations and 128 electrification
+  scenarios, tested under both scenario shift and leave-one-county-out geographic shift.</p>
+  <div class="find"><b>Finding.</b> Selecting models on accuracy leaves validation error flat while
+  degrading the safety-relevant error, raising missed at-risk stations from 30 to 38 per cent
+  beyond the training range. The apparent ranking between models inverts once the flagged rate is
+  equalised. And two spatial assignments that agree nationally to numerical precision still
+  disagree on 4.5 per cent of overload labels, so part of the uncertainty is irreducible without
+  operator data.</div>
+
+  <h3>Recovering what is behind a feeder</h3>
+  <p>Network planning needs to know how many heat pumps, electric vehicles and rooftop solar
+  systems sit behind a feeder, and often nobody does. This work recovers adoption fractions from a
+  single year of aggregate hourly load by exploiting each technology's distinct time-frequency
+  signature, comparing five estimators from interpretable dictionaries to neural networks.</p>
+
+  <h3>Cities and towns do not face the same problem</h3>
+  <p>A glide-path study across two contrasting feeders found that a rural town network on 50 kVA
+  pole-mounted transformers reaches its limits at far lower adoption than a Dublin suburb on
+  400 kVA units, so a uniform national target produces very different stress depending on where
+  you live.</p>
+
+  <h3>Earlier work</h3>
+  <p>My doctorate developed probabilistic occupancy models from national time-use survey data using
+  Bayesian neural networks and hidden Markov models, with surrogate models replacing expensive
+  simulation and validation against instrumentation I deployed in occupied homes. Before that, at
+  IIT Delhi, phase change material wall assemblies characterised by differential scanning
+  calorimetry, and a real-gas conductivity model for vacuum insulation panels that revised their
+  predicted service life downward.</p>
+</section>
+
+<section id="publications" tabindex="-1">
+  <h2>Publications</h2>
+  <p class="lede">Sixteen peer-reviewed journal articles, eleven conference papers, two book
+  chapters, a policy paper and a granted patent. Over 500 citations, h-index 9.</p>
+  <h3>Journal articles</h3>
+  <ol class="pubs"><li>Zhang, S., Byrne, S., <b class='me'>Sood, D.</b>, O'Donnell, J. and O'Donnell, T. (2026). Impact of vehicle to home on system demand profiles and available flexibility. <em>International Journal of Energy Research</em>.</li>
+<li>Alhindawi, I., Fernandes, J.M., McGrath, J.A., <b class='me'>Sood, D.</b>, O'Donnell, J. and Byrne, M.A. (2025). Temporal assessment of overheating risk and thermal environment in naturally ventilated energy-efficient airtight dwellings. <em>Journal of Building Engineering</em>.</li>
+<li>Etemad, A., Maccarini, A., Finn, D., Afshari, A., <b class='me'>Sood, D.</b> and O'Donnell, J. (2025). A techno-economic assessment framework for district-scale thermal source networks serving existing buildings. <em>Energy and Buildings</em>.</li>
+<li>Alhindawi, I., McGrath, J.A., <b class='me'>Sood, D.</b>, O'Donnell, J. and Byrne, M.A. (2025). A seasonal assessment of indoor air quality and thermal performance in naturally ventilated airtight energy-efficient dwellings. <em>Building and Environment</em>.</li>
+<li><b class='me'>Sood, D.</b>, Alhindawi, I., Ali, U., Finn, D., McGrath, J.A., Byrne, M.A., Mavrogianni, A. and O'Donnell, J. (2025). Quantifying uncertainty in multi-scale energy analysis of residential archetypes: a stochastic occupancy approach. <em>Building and Environment</em>.</li>
+<li><b class='me'>Sood, D.</b>, Wolf, S., Cali, D., Korsholm Andersen, R., Li, R., Madsen, H. and O'Donnell, J. (2025). Room-level domestic occupancy simulation model using time use survey data. <em>Journal of Building Performance Simulation</em>.</li>
+<li>Zhang, S., Byrne, S., Fennelly, L., <b class='me'>Sood, D.</b>, O'Donnell, J. and O'Donnell, T. (2025). Home energy optimization using vehicle-to-home. <em>Open Research Europe</em>.</li>
+<li><b class='me'>Sood, D.</b>, Alhindawi, I., Ali, U., Finn, D., McGrath, J.A., Byrne, M.A. and O'Donnell, J. (2025). Machine learning based multi-objective optimisation of energy consumption, thermal comfort and CO2 concentration. <em>Building and Environment</em>.</li>
+<li>Ali, U., Bano, S., Shamsi, M.H., <b class='me'>Sood, D.</b>, Hoare, C., Zuo, W., Hewitt, N. and O'Donnell, J. (2024). Urban residential building stock synthetic datasets for building energy performance analysis. <em>Data in Brief</em>.</li>
+<li>Ali, U., Bano, S., Shamsi, M.H., <b class='me'>Sood, D.</b>, Hoare, C., Zuo, W., Hewitt, N. and O'Donnell, J. (2024). Urban building energy performance prediction and retrofit analysis using a data-driven machine learning approach. <em>Energy and Buildings</em>.</li>
+<li><b class='me'>Sood, D.</b>, Alhindawi, I., Ali, U., McGrath, J.A., Byrne, M.A., Finn, D. and O'Donnell, J. (2023). Zone-wise occupancy schedules developed using Time Use Survey data for building energy performance simulations. <em>Data in Brief</em>.</li>
+<li><b class='me'>Sood, D.</b>, Alhindawi, I., Ali, U., McGrath, J.A., Byrne, M.A., Finn, D. and O'Donnell, J. (2023). Simulation-based evaluation of occupancy on energy consumption of multi-scale residential building archetypes. <em>Journal of Building Engineering</em>.</li>
+<li>Malhotra, A., Bischof, J., Nichersu, A., Hafele, K.H., Exenberger, J., <b class='me'>Sood, D.</b>, Allan, J., Frisch, J., van Treeck, C., O'Donnell, J. and Schweiger, G. (2022). Information modelling for urban building energy simulation: a taxonomic review. <em>Building and Environment</em>.</li>
+<li><b class='me'>Sood, D.</b>, Das, D., Ali, S.F. and Rakshit, D. (2021). Numerical analysis of an automobile cabin thermal management using passive phase change material. <em>Thermal Science and Engineering Progress</em>.</li>
+<li>Saikia, P., Pancholi, M., <b class='me'>Sood, D.</b> and Rakshit, D. (2020). Dynamic optimization of multi-retrofit building envelope for enhanced energy performance with a case study in hot Indian climate. <em>Energy</em>.</li>
+<li><b class='me'>Sood, D.</b> and Harish, V.S.K.V. (2018). An investigation on application of passive strategies to improve thermal performance of buildings. <em>Journal of Thermal Engineering and Applications</em>.</li></ol>
+  <h3>Conference papers</h3>
+  <ol class="pubs"><li><b class='me'>Sood, D.</b>, Finn, D. and O'Donnell, J. (2026). Building energy simulation module: the design, implementation and evaluation of a dual-assessment masters module. <em>European Conference on Computing in Construction, accepted</em>.</li>
+<li>Alhindawi, I., McGrath, J., <b class='me'>Sood, D.</b>, O'Donnell, J. and Byrne, M. (2024). Evaluation of indoor environmental quality and thermal environment in airtight energy-efficient naturally ventilated dwellings. <em>AIVC</em>.</li>
+<li>Alhindawi, I., McGrath, J., <b class='me'>Sood, D.</b>, O'Donnell, J. and Byrne, M. (2024). A longitudinal study to assess indoor environmental quality in airtight energy-efficient naturally ventilated dwellings. <em>AIVC</em>.</li>
+<li>Bano, S., Ali, U., <b class='me'>Sood, D.</b> and O'Donnell, J. (2024). Intelligent retrofits in residential buildings: a knowledge-based approach. <em>European Conference on Computing in Construction</em>.</li>
+<li>Ali, U., Bano, S., Hoare, C., Shamsi, M.H., <b class='me'>Sood, D.</b> and O'Donnell, J. (2024). A graph based framework to support data-driven urban building energy simulations. <em>European Conference on Computing in Construction</em>.</li>
+<li><b class='me'>Sood, D.</b>, Alhindawi, I., Ali, U., Korsholm Andersen, R., Finn, D., McGrath, J., Byrne, M. and O'Donnell, J. (2023). Identification of influential factors for combined energy consumption and indoor environmental quality in residential buildings. <em>Journal of Physics: Conference Series</em>.</li>
+<li>Ali, U., Bano, S., Shamsi, M.H., <b class='me'>Sood, D.</b>, Hoare, C. and O'Donnell, J. (2023). Residential building energy performance prediction at an urban scale using ensemble machine learning algorithms. <em>European Conference on Computing in Construction</em>.</li>
+<li><b class='me'>Sood, D.</b>, Alhindawi, I., Ali, U., McGrath, J., Byrne, M. and O'Donnell, J. (2022). Development of occupancy-based multi-scale building archetypes. <em>CLIMA 2022</em>.</li>
+<li>Agrawal, A. and <b class='me'>Sood, D.</b> (2020). Development and performance analysis of pine needle based downdraft gasifier system. <em>ICET-2020, MNIT Bhopal</em>.</li>
+<li><b class='me'>Sood, D.</b>, Saikia, P. and Rakshit, D. (2019). Effect of water permeation on the performance of vacuum insulation panels. <em>IHMTC-2019, IIT Roorkee</em>.</li>
+<li><b class='me'>Sood, D.</b> and Harish, V.S.K.V. (2019). A survey of recent progress in energy conversion and storage. <em>ICERD-7, Kuwait</em>.</li></ol>
+  <h3>Policy, chapters and patents</h3>
+  <ol class="pubs"><li><b class='me'>Sood, D.</b>, Alhindawi, I., McGrath, J., Byrne, M., Kenny, P., Doody, J. and O'Donnell, J. (2025). Indoor Air Quality and Ventilation in Newly Built Homes. <em>Policy paper, publicpolicy.ie</em>.</li>
+<li><b class='me'>Sood, D.</b>, Saikia, P., Pancholi, M. and Rakshit, D. (2021). Performance analysis of vacuum insulation panels using real gas equation for mitigating solar heat gain in buildings. <em>Book chapter, Springer</em>.</li>
+<li>Agrawal, A. and <b class='me'>Sood, D.</b> (2021). Development and performance analysis of pine needle-based downdraft gasifier system. <em>Book chapter, Springer</em>.</li>
+<li>Jain, L. and <b class='me'>Sood, D.</b> (2016). Folding Bicycle and its Mechanism of Folding Thereof. <em>India Patent 417194, granted</em>.</li></ol>
+</section>
+
+<section id="teaching" tabindex="-1">
+  <h2>Teaching</h2>
+  <p class="lede">I coordinate Energy Systems in Buildings II, a core postgraduate module in
+  mechanical and materials engineering, and I treat changes to it as something to test rather
+  than assert.</p>
+
+  <p>The module runs on a deliberate half-and-half split between lectures and project work.
+  Students choose a real building and location, obtain local climate data, model it, and defend a
+  retrofit proposal in a presentation where their assumptions are questioned. It builds on
+  thermodynamics, heat transfer, fluid dynamics and psychrometrics, extending into load
+  calculation, HVAC design and the thermal performance of building elements.</p>
+
+  <p>I moved the module onto IES VE, an industry-standard platform, so that the skills transfer to
+  professional practice and students spend their effort on analysis rather than on fighting the
+  software. I then evaluated the design and its dual-assessment structure and published the
+  findings at the European Conference on Computing in Construction.</p>
+
+  <h3>Teaching and supervision</h3>
+  <ul class="rows">
+    <li><div class="when">2025 to present</div><div class="what"><b>Energy Systems in Buildings II</b><span>Module Coordinator and part-time lecturer, UCD</span></div></li>
+    <li><div class="when">2020 to 2023</div><div class="what"><b>Energy Systems in Buildings II, Measurement and Instrumentation</b><span>Teaching assistant, UCD</span></div></li>
+    <li><div class="when">2019</div><div class="what"><b>Energy Conservation in Buildings</b><span>Teaching assistant, IIT Delhi</span></div></li>
+    <li><div class="when">ongoing</div><div class="what"><b>Supervision</b><span>Taught Master's dissertations, undergraduate final-year projects and research interns</span></div></li>
+  </ul>
+</section>
+
+<section id="graph" tabindex="-1">
+  <h2>Knowledge graph</h2>
+  <p class="lede">The same information as a graph: roles, teaching, projects, outputs and the
+  organisations that connect them. Node size follows how connected something is, so the hubs of
+  the work emerge on their own.</p>
+  <p>Hover a node to isolate its neighbourhood, drag to rearrange, or switch to the table.
+  The underlying data is also available as <a href="sood_kg.ttl">RDF Turtle</a>.</p>
+  <div class="frame"><iframe src="kg.html" title="Interactive knowledge graph" loading="lazy"></iframe></div>
+</section>
+
+<section id="about" tabindex="-1">
+  <h2>Positions &amp; contact</h2>
+  <ul class="rows">
+    <li><div class="when">2025 to present</div><div class="what"><b>Senior Energy Systems Researcher</b><span>UCD Energy Institute and School of Mechanical and Materials Engineering</span></div></li>
+    <li><div class="when">2026 to present</div><div class="what"><b>Data Theme Lead</b><span>Data and Intellectual Property Sub-Committee, NexSys</span></div></li>
+    <li><div class="when">2025 to present</div><div class="what"><b>Ireland representative</b><span>IEA EBC Annex 95, Human-Centric Buildings Network</span></div></li>
+    <li><div class="when">2025 to present</div><div class="what"><b>Contributing reviewer</b><span>IPCC Seventh Assessment Cycle Special Report on Climate Change and Cities</span></div></li>
+    <li><div class="when">2024 to 2025</div><div class="what"><b>Research Assistant</b><span>UCD Energy Institute</span></div></li>
+    <li><div class="when">2020 to 2024</div><div class="what"><b>Doctoral Researcher</b><span>University College Dublin, SEAI ALIVE Scholarship</span></div></li>
+    <li><div class="when">2020</div><div class="what"><b>Project Associate</b><span>The Energy and Resources Institute, New Delhi</span></div></li>
+    <li><div class="when">2019</div><div class="what"><b>Junior Research Fellow</b><span>IIT Delhi</span></div></li>
+  </ul>
+
+  <h3>Education</h3>
+  <ul class="rows">
+    <li><div class="when">2020 to 2025</div><div class="what"><b>PhD, Mechanical Engineering</b><span>University College Dublin</span></div></li>
+    <li><div class="when">2017 to 2019</div><div class="what"><b>M.Tech, Renewable Energy Engineering and Management</b><span>TERI School of Advanced Studies, New Delhi</span></div></li>
+    <li><div class="when">2012 to 2016</div><div class="what"><b>B.E., Mechanical Engineering</b><span>Chitkara University, India</span></div></li>
+  </ul>
+
+  <h3>Recognition</h3>
+  <ul class="rows">
+    <li><div class="when">2026</div><div class="what"><b>EU TalentOn</b><span>European Commission, selected participant</span></div></li>
+    <li><div class="when">2024</div><div class="what"><b>NSAI Standards Innovation Award</b><span>Winner</span></div></li>
+    <li><div class="when">2023</div><div class="what"><b>CIBSE Building Simulation Young Modeller Award</b><span>Winner</span></div></li>
+  </ul>
+
+  <h3>Contact</h3>
+  <ul class="contact">
+    <li><span>Email</span><div><a href="mailto:divyanshu.sood@ucd.ie">divyanshu.sood@ucd.ie</a></div></li>
+    <li><span>Scholar</span><div><a href="https://scholar.google.com/citations?user=WJMPibgAAAAJ&amp;hl=en">Google Scholar</a></div></li>
+    <li><span>LinkedIn</span><div><a href="https://www.linkedin.com/in/divyanshu04/">linkedin.com/in/divyanshu04</a></div></li>
+    <li><span>GitHub</span><div><a href="https://github.com/divyanshusood">github.com/divyanshusood</a></div></li>
+    <li><span>Based in</span><div>Dublin, Ireland</div></li>
+  </ul>
+
+  <footer>Member, Engineers Ireland. Built as a static site on GitHub Pages.</footer>
+</section>
+
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="assets/site.js"></script>
+</body></html>

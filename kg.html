@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Divyanshu Sood — Knowledge Graph</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;
+ --surface:#fbfbfa; --glow:#ffffff; --panel:#ffffff; --ink:#0b0b0b; --sec:#54534f; --muted:#9a9a93;
+ --line:#e4e4df; --edge:#c9c9c2;
+ --role:#2a78d6; --project:#eb6834; --output:#1baf7a; --org:#9a9a94; --person:#141413;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;
+ --surface:#131312; --glow:#20201e; --panel:#1e1e1c; --ink:#f7f7f4; --sec:#c3c2b7; --muted:#86867f;
+ --line:#2e2e29; --edge:#3a3a34;
+ --role:#3987e5; --project:#d95926; --output:#199e70; --org:#86867f; --person:#ffffff;}}
+:root[data-theme="dark"]{color-scheme:dark;
+ --surface:#131312; --glow:#20201e; --panel:#1e1e1c; --ink:#f7f7f4; --sec:#c3c2b7; --muted:#86867f;
+ --line:#2e2e29; --edge:#3a3a34;
+ --role:#3987e5; --project:#d95926; --output:#199e70; --org:#86867f; --person:#ffffff;}
+*{box-sizing:border-box} html,body{margin:0;height:100%}
+body{background:var(--surface);color:var(--ink);
+ font:14px/1.55 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+ -webkit-font-smoothing:antialiased}
+.shell{max-width:1220px;margin:0 auto;padding:22px 18px 28px}
+h1{margin:0;font-size:23px;font-weight:650;letter-spacing:-.015em}
+.sub{color:var(--sec);font-size:13.5px;margin-top:4px;max-width:70ch}
+.bar{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:16px 0 11px}
+.chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--panel);
+ color:var(--ink);border-radius:999px;padding:5px 12px;font-size:12.5px;cursor:pointer;user-select:none;
+ transition:opacity .16s,border-color .16s}
+.chip:hover{border-color:var(--sec)}
+.chip[aria-pressed="false"]{opacity:.35}
+.mk{width:10px;height:10px;flex:none}
+.mk.circle{border-radius:50%} .mk.square{border-radius:2.5px}
+.spacer{flex:1}
+button.plain{border:1px solid var(--line);background:var(--panel);color:var(--sec);border-radius:999px;
+ padding:5px 12px;font-size:12.5px;cursor:pointer;transition:color .16s,border-color .16s}
+button.plain:hover{color:var(--ink);border-color:var(--sec)}
+.frame{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+ background:radial-gradient(120% 90% at 50% 38%,var(--glow) 0%,var(--surface) 62%)}
+svg{width:100%;height:76vh;min-height:520px;display:block;touch-action:none}
+.link{fill:none;stroke:var(--edge);stroke-opacity:.5;transition:stroke .18s,stroke-opacity .18s}
+.node{cursor:pointer}
+.node path{stroke:var(--surface);stroke-width:2.2px}
+.node text{font-size:10.5px;font-weight:500;fill:var(--sec);pointer-events:none;paint-order:stroke;
+ stroke:var(--surface);stroke-width:3.4px;stroke-linejoin:round}
+.node.org text{fill:var(--muted);font-weight:400}
+.node.hub text{font-size:11.5px;font-weight:650;fill:var(--ink)}
+.node.self text{font-size:14px;font-weight:700;fill:var(--ink)}
+#tip{position:fixed;pointer-events:none;opacity:0;transform:translateY(4px);
+ transition:opacity .14s,transform .14s;background:var(--panel);color:var(--ink);
+ border:1px solid var(--line);border-radius:12px;padding:11px 13px;max-width:310px;font-size:12.5px;
+ box-shadow:0 14px 40px rgba(0,0,0,.16);z-index:9}
+#tip b{display:block;margin-bottom:4px;font-size:13.5px;font-weight:650}
+#tip span{color:var(--sec);display:block}
+#tip i{display:inline-block;margin-top:7px;font-style:normal;font-size:11px;color:var(--muted);
+ text-transform:uppercase;letter-spacing:.07em}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--sec);font-weight:600;position:sticky;top:0;background:var(--surface)}
+#tableView{display:none;max-height:76vh;overflow:auto}
+.cap{color:var(--muted);font-size:12px;margin-top:11px;max-width:95ch}
+</style></head><body>
+<div class="shell">
+  <h1>Divyanshu Sood</h1>
+  <div class="sub">Roles, teaching, projects, outputs and the organisations that connect them. Node size follows how connected a thing is. Hover to isolate a neighbourhood; drag to rearrange.</div>
+  <div class="bar" id="legend"></div>
+  <div class="frame"><svg id="g"></svg></div>
+  <div id="tableView"></div>
+  <div class="cap" id="cap"></div>
+</div>
+<div id="tip" role="status"></div>
+<script>
+const DATA = {"nodes": [{"id": "Divyanshu Sood", "cls": "person", "label": "Divyanshu Sood", "note": "Mechanical engineer; spatial energy systems modelling, machine learning, teaching"}, {"id": "UCD", "cls": "org", "label": "UCD", "note": "University College Dublin"}, {"id": "UCD Energy Institute", "cls": "org", "label": "UCD Energy Institute", "note": "UCD Energy Institute"}, {"id": "NexSys", "cls": "org", "label": "NexSys", "note": "NexSys national energy systems programme"}, {"id": "SEAI", "cls": "org", "label": "SEAI", "note": "Sustainable Energy Authority of Ireland"}, {"id": "ESB", "cls": "org", "label": "ESB", "note": "ESB Networks"}, {"id": "CODEMA", "cls": "org", "label": "CODEMA", "note": "Dublin's local authority energy agency"}, {"id": "ARUP", "cls": "org", "label": "ARUP", "note": "ARUP"}, {"id": "PMVT", "cls": "org", "label": "PMVT", "note": "Peter McVerry Trust"}, {"id": "TU Dublin", "cls": "org", "label": "TU Dublin", "note": "TU Dublin"}, {"id": "Defence Forces", "cls": "org", "label": "Defence Forces", "note": "Irish Defence Forces"}, {"id": "Bus Eireann", "cls": "org", "label": "Bus Eireann", "note": "Bus Eireann"}, {"id": "Wind Energy Ireland", "cls": "org", "label": "Wind Energy Ireland", "note": "Wind Energy Ireland"}, {"id": "EPRI", "cls": "org", "label": "EPRI", "note": "EPRI"}, {"id": "IEA EBC", "cls": "org", "label": "IEA EBC", "note": "IEA Energy in Buildings and Communities"}, {"id": "IPCC", "cls": "org", "label": "IPCC", "note": "Intergovernmental Panel on Climate Change"}, {"id": "Engineers Ireland", "cls": "org", "label": "Engineers Ireland", "note": "Engineers Ireland"}, {"id": "NSAI", "cls": "org", "label": "NSAI", "note": "NSAI"}, {"id": "DTU", "cls": "org", "label": "DTU", "note": "Technical University of Denmark"}, {"id": "UCL", "cls": "org", "label": "UCL", "note": "University College London"}, {"id": "Surrey", "cls": "org", "label": "Surrey", "note": "University of Surrey"}, {"id": "UL", "cls": "org", "label": "UL", "note": "University of Limerick"}, {"id": "IIT Delhi", "cls": "org", "label": "IIT Delhi", "note": "IIT Delhi"}, {"id": "TERI", "cls": "org", "label": "TERI", "note": "TERI, New Delhi"}, {"id": "Chitkara", "cls": "org", "label": "Chitkara", "note": "Chitkara University"}, {"id": "ASHRAE", "cls": "org", "label": "ASHRAE", "note": "ASHRAE"}, {"id": "IBPSA", "cls": "org", "label": "IBPSA", "note": "IBPSA"}, {"id": "Senior Energy Systems Researcher", "cls": "role", "label": "Senior Energy Systems Researcher", "note": "Apr 2025 to present"}, {"id": "Module Coordinator", "cls": "role", "label": "Module Coordinator", "note": "Energy Systems in Buildings II, Sept 2025 to present"}, {"id": "Data Theme Lead", "cls": "role", "label": "Data Theme Lead", "note": "Data and IP Sub-Committee, from 2026"}, {"id": "Ireland Representative", "cls": "role", "label": "Ireland Representative", "note": "IEA EBC Annex 95, six activities"}, {"id": "IPCC Reviewer", "cls": "role", "label": "IPCC Reviewer", "note": "AR7 Special Report on Climate Change and Cities"}, {"id": "Member, Engineers Ireland", "cls": "role", "label": "Member, Engineers Ireland", "note": "MIEI; Chartered Engineer route begun"}, {"id": "NSAI Young Professional", "cls": "role", "label": "NSAI Young Professional", "note": "Standards participation"}, {"id": "Research Assistant", "cls": "role", "label": "Research Assistant", "note": "Oct 2024 to Mar 2025"}, {"id": "Doctoral Researcher", "cls": "role", "label": "Doctoral Researcher", "note": "Sept 2020 to Sept 2024, SEAI ALIVE Scholarship"}, {"id": "Project Associate", "cls": "role", "label": "Project Associate", "note": "Jan to Aug 2020"}, {"id": "Junior Research Fellow", "cls": "role", "label": "Junior Research Fellow", "note": "Jul to Dec 2019"}, {"id": "NEDT", "cls": "project", "label": "NEDT", "note": "National Energy Digital Twin: dwellings to LV transformer districts; scenarios, thermal ageing, driver attribution"}, {"id": "Ask NEDT", "cls": "project", "label": "Ask NEDT", "note": "Retrieval-augmented interface; retrieve-or-compute routing and evaluation harness"}, {"id": "Overload benchmark", "cls": "project", "label": "Overload benchmark", "note": "Reliability of ML for transformer overload screening under distribution shift"}, {"id": "DER disaggregation", "cls": "project", "label": "DER disaggregation", "note": "Heat pump, EV and solar adoption from aggregate feeder signals"}, {"id": "Knowledge graph framework", "cls": "project", "label": "Knowledge graph framework", "note": "Transformer-level planning with traceable provenance"}, {"id": "Last Mile of Net Zero", "cls": "project", "label": "Last Mile of Net Zero", "note": "Urban versus rural electrification glide-paths"}, {"id": "ReserveLens", "cls": "project", "label": "ReserveLens", "note": "Grid services from data centre UPS batteries; safety as a hard constraint"}, {"id": "Climate and electricity systems", "cls": "project", "label": "Climate and electricity systems", "note": "Seven-person multi-disciplinary UCD team"}, {"id": "Intelligent data harvesting", "cls": "project", "label": "Intelligent data harvesting", "note": "Computer vision and generative methods for building stock classification"}, {"id": "V2H charging optimisation", "cls": "project", "label": "V2H charging optimisation", "note": "Cost-minimising charging under tariffs; peak load cut by half"}, {"id": "Retrofit carbon assessment", "cls": "project", "label": "Retrofit carbon assessment", "note": "Operational and embodied carbon across a social housing portfolio"}, {"id": "PhD: occupancy and IEQ", "cls": "project", "label": "PhD: occupancy and IEQ", "note": "Bayesian neural networks and hidden Markov models; sensors in occupied homes"}, {"id": "Room-level occupancy simulator", "cls": "project", "label": "Room-level occupancy simulator", "note": "Research visit"}, {"id": "Probabilistic occupancy model", "cls": "project", "label": "Probabilistic occupancy model", "note": "Research visit"}, {"id": "PCM envelope optimisation", "cls": "project", "label": "PCM envelope optimisation", "note": "Phase change materials, DSC over 1000 cycles, genetic algorithm"}, {"id": "Vacuum insulation panels", "cls": "project", "label": "Vacuum insulation panels", "note": "Real-gas conductivity model; service life revised down"}, {"id": "16 journal papers", "cls": "output", "label": "16 journal papers", "note": "Q1 journals, 500+ citations, h-index 9"}, {"id": "Building & Environment 2024", "cls": "output", "label": "Building & Environment 2024", "note": "Physics-informed ML validated at 1.9% CVRMSE, R2 0.99"}, {"id": "NeurIPS AI4Grid 2026", "cls": "output", "label": "NeurIPS AI4Grid 2026", "note": "Under review; accuracy tuning degrades the safety metric"}, {"id": "CISP-BMEI 2026", "cls": "output", "label": "CISP-BMEI 2026", "note": "Signal processing track"}, {"id": "EC3 2026 pedagogy paper", "cls": "output", "label": "EC3 2026 pedagogy paper", "note": "Dual-assessment masters module design, evaluated and published"}, {"id": "Policy paper", "cls": "output", "label": "Policy paper", "note": "Indoor air quality and ventilation in new homes, publicpolicy.ie"}, {"id": "NSAI Standards Innovation Award", "cls": "output", "label": "NSAI Standards Innovation Award", "note": "2024"}, {"id": "CIBSE Young Modeller Award", "cls": "output", "label": "CIBSE Young Modeller Award", "note": "2023"}, {"id": "EU TalentOn 2026", "cls": "output", "label": "EU TalentOn 2026", "note": "European Commission, selected participant"}, {"id": "EYEF 2026", "cls": "output", "label": "EYEF 2026", "note": "Selected participant"}, {"id": "Energy Systems in Buildings II", "cls": "teaching", "label": "Energy Systems in Buildings II", "note": "Core postgraduate module; thermodynamics, heat transfer, fluid dynamics, psychrometrics, load calculation, HVAC design"}, {"id": "Measurement and Instrumentation", "cls": "teaching", "label": "Measurement and Instrumentation", "note": "Teaching assistant, 2020 to 2023"}, {"id": "Energy Conservation in Buildings", "cls": "teaching", "label": "Energy Conservation in Buildings", "note": "Teaching assistant, 2019"}, {"id": "Dual-assessment design", "cls": "teaching", "label": "Dual-assessment design", "note": "Half lectures, half project work; building simulation in IES VE, moved from Simergy"}, {"id": "Master's dissertations", "cls": "teaching", "label": "Master's dissertations", "note": "Co-supervision of taught ME and MSc dissertation projects"}, {"id": "Final-year projects", "cls": "teaching", "label": "Final-year projects", "note": "Co-supervision of undergraduate final-year projects"}, {"id": "Research interns", "cls": "teaching", "label": "Research interns", "note": "Two interns on life cycle assessment of retrofit strategies; recruiting one for the digital twin"}], "links": [{"source": "Divyanshu Sood", "target": "Senior Energy Systems Researcher", "rel": "holds"}, {"source": "Senior Energy Systems Researcher", "target": "UCD Energy Institute", "rel": "at"}, {"source": "Divyanshu Sood", "target": "Module Coordinator", "rel": "holds"}, {"source": "Module Coordinator", "target": "UCD", "rel": "at"}, {"source": "Divyanshu Sood", "target": "Data Theme Lead", "rel": "holds"}, {"source": "Data Theme Lead", "target": "NexSys", "rel": "at"}, {"source": "Divyanshu Sood", "target": "Ireland Representative", "rel": "holds"}, {"source": "Ireland Representative", "target": "IEA EBC", "rel": "at"}, {"source": "Divyanshu Sood", "target": "IPCC Reviewer", "rel": "holds"}, {"source": "IPCC Reviewer", "target": "IPCC", "rel": "at"}, {"source": "Divyanshu Sood", "target": "Member, Engineers Ireland", "rel": "holds"}, {"source": "Member, Engineers Ireland", "target": "Engineers Ireland", "rel": "at"}, {"source": "Divyanshu Sood", "target": "NSAI Young Professional", "rel": "holds"}, {"source": "NSAI Young Professional", "target": "NSAI", "rel": "at"}, {"source": "Divyanshu Sood", "target": "Research Assistant", "rel": "holds"}, {"source": "Research Assistant", "target": "UCD", "rel": "at"}, {"source": "Divyanshu Sood", "target": "Doctoral Researcher", "rel": "holds"}, {"source": "Doctoral Researcher", "target": "UCD", "rel": "at"}, {"source": "Divyanshu Sood", "target": "Project Associate", "rel": "holds"}, {"source": "Project Associate", "target": "TERI", "rel": "at"}, {"source": "Divyanshu Sood", "target": "Junior Research Fellow", "rel": "holds"}, {"source": "Junior Research Fellow", "target": "IIT Delhi", "rel": "at"}, {"source": "Divyanshu Sood", "target": "NEDT", "rel": "works on"}, {"source": "NEDT", "target": "UCD Energy Institute", "rel": "with"}, {"source": "NEDT", "target": "NexSys", "rel": "with"}, {"source": "NEDT", "target": "ESB", "rel": "with"}, {"source": "Divyanshu Sood", "target": "Ask NEDT", "rel": "works on"}, {"source": "Ask NEDT", "target": "UCD Energy Institute", "rel": "with"}, {"source": "Divyanshu Sood", "target": "Overload benchmark", "rel": "works on"}, {"source": "Overload benchmark", "target": "UCD Energy Institute", "rel": "with"}, {"source": "Divyanshu Sood", "target": "DER disaggregation", "rel": "works on"}, {"source": "DER disaggregation", "target": "UCD Energy Institute", "rel": "with"}, {"source": "Divyanshu Sood", "target": "Knowledge graph framework", "rel": "works on"}, {"source": "Knowledge graph framework", "target": "UCD Energy Institute", "rel": "with"}, {"source": "Divyanshu Sood", "target": "Last Mile of Net Zero", "rel": "works on"}, {"source": "Last Mile of Net Zero", "target": "UCD Energy Institute", "rel": "with"}, {"source": "Divyanshu Sood", "target": "ReserveLens", "rel": "works on"}, {"source": "ReserveLens", "target": "EPRI", "rel": "with"}, {"source": "Divyanshu Sood", "target": "Climate and electricity systems", "rel": "works on"}, {"source": "Climate and electricity systems", "target": "UCD", "rel": "with"}, {"source": "Divyanshu Sood", "target": "Intelligent data harvesting", "rel": "works on"}, {"source": "Intelligent data harvesting", "target": "UCD", "rel": "with"}, {"source": "Divyanshu Sood", "target": "V2H charging optimisation", "rel": "works on"}, {"source": "V2H charging optimisation", "target": "UCD", "rel": "with"}, {"source": "Divyanshu Sood", "target": "Retrofit carbon assessment", "rel": "works on"}, {"source": "Retrofit carbon assessment", "target": "ARUP", "rel": "with"}, {"source": "Retrofit carbon assessment", "target": "PMVT", "rel": "with"}, {"source": "Divyanshu Sood", "target": "PhD: occupancy and IEQ", "rel": "works on"}, {"source": "PhD: occupancy and IEQ", "target": "UCD", "rel": "with"}, {"source": "Divyanshu Sood", "target": "Room-level occupancy simulator", "rel": "works on"}, {"source": "Room-level occupancy simulator", "target": "DTU", "rel": "with"}, {"source": "Divyanshu Sood", "target": "Probabilistic occupancy model", "rel": "works on"}, {"source": "Probabilistic occupancy model", "target": "UCL", "rel": "with"}, {"source": "Divyanshu Sood", "target": "PCM envelope optimisation", "rel": "works on"}, {"source": "PCM envelope optimisation", "target": "IIT Delhi", "rel": "with"}, {"source": "Divyanshu Sood", "target": "Vacuum insulation panels", "rel": "works on"}, {"source": "Vacuum insulation panels", "target": "IIT Delhi", "rel": "with"}, {"source": "Divyanshu Sood", "target": "16 journal papers", "rel": "produced"}, {"source": "Divyanshu Sood", "target": "Building & Environment 2024", "rel": "produced"}, {"source": "Intelligent data harvesting", "target": "Building & Environment 2024", "rel": "led to"}, {"source": "Divyanshu Sood", "target": "NeurIPS AI4Grid 2026", "rel": "produced"}, {"source": "Overload benchmark", "target": "NeurIPS AI4Grid 2026", "rel": "led to"}, {"source": "Divyanshu Sood", "target": "CISP-BMEI 2026", "rel": "produced"}, {"source": "DER disaggregation", "target": "CISP-BMEI 2026", "rel": "led to"}, {"source": "Divyanshu Sood", "target": "EC3 2026 pedagogy paper", "rel": "produced"}, {"source": "Module Coordinator", "target": "EC3 2026 pedagogy paper", "rel": "led to"}, {"source": "Divyanshu Sood", "target": "Policy paper", "rel": "produced"}, {"source": "PhD: occupancy and IEQ", "target": "Policy paper", "rel": "led to"}, {"source": "Divyanshu Sood", "target": "NSAI Standards Innovation Award", "rel": "produced"}, {"source": "NSAI", "target": "NSAI Standards Innovation Award", "rel": "led to"}, {"source": "Divyanshu Sood", "target": "CIBSE Young Modeller Award", "rel": "produced"}, {"source": "Divyanshu Sood", "target": "EU TalentOn 2026", "rel": "produced"}, {"source": "ReserveLens", "target": "EU TalentOn 2026", "rel": "led to"}, {"source": "Divyanshu Sood", "target": "EYEF 2026", "rel": "produced"}, {"source": "Divyanshu Sood", "target": "Energy Systems in Buildings II", "rel": "teaches or supervises"}, {"source": "Energy Systems in Buildings II", "target": "UCD", "rel": "at"}, {"source": "Divyanshu Sood", "target": "Measurement and Instrumentation", "rel": "teaches or supervises"}, {"source": "Measurement and Instrumentation", "target": "UCD", "rel": "at"}, {"source": "Divyanshu Sood", "target": "Energy Conservation in Buildings", "rel": "teaches or supervises"}, {"source": "Energy Conservation in Buildings", "target": "IIT Delhi", "rel": "at"}, {"source": "Divyanshu Sood", "target": "Dual-assessment design", "rel": "teaches or supervises"}, {"source": "Divyanshu Sood", "target": "Master's dissertations", "rel": "teaches or supervises"}, {"source": "Master's dissertations", "target": "UCD", "rel": "at"}, {"source": "Divyanshu Sood", "target": "Final-year projects", "rel": "teaches or supervises"}, {"source": "Final-year projects", "target": "UCD", "rel": "at"}, {"source": "Divyanshu Sood", "target": "Research interns", "rel": "teaches or supervises"}, {"source": "Research interns", "target": "ARUP", "rel": "at"}, {"source": "Research interns", "target": "PMVT", "rel": "at"}, {"source": "Energy Systems in Buildings II", "target": "Module Coordinator", "rel": "coordinated as"}, {"source": "Dual-assessment design", "target": "Energy Systems in Buildings II", "rel": "applied to"}, {"source": "Dual-assessment design", "target": "EC3 2026 pedagogy paper", "rel": "evaluated in"}, {"source": "Research interns", "target": "NEDT", "rel": "contributes to"}, {"source": "PhD: occupancy and IEQ", "target": "CODEMA", "rel": "adopted by"}, {"source": "PhD: occupancy and IEQ", "target": "TU Dublin", "rel": "adopted by"}, {"source": "PhD: occupancy and IEQ", "target": "Defence Forces", "rel": "adopted by"}, {"source": "PhD: occupancy and IEQ", "target": "ARUP", "rel": "adopted by"}, {"source": "PhD: occupancy and IEQ", "target": "PMVT", "rel": "adopted by"}, {"source": "NEDT", "target": "SEAI", "rel": "presented to"}, {"source": "NEDT", "target": "ESB", "rel": "presented to"}, {"source": "NEDT", "target": "Bus Eireann", "rel": "presented to"}, {"source": "NEDT", "target": "Wind Energy Ireland", "rel": "presented to"}, {"source": "NEDT", "target": "EPRI", "rel": "presented to"}, {"source": "Divyanshu Sood", "target": "Surrey", "rel": "proposal with"}, {"source": "Divyanshu Sood", "target": "UL", "rel": "proposal with"}, {"source": "Divyanshu Sood", "target": "ASHRAE", "rel": "organised events for"}, {"source": "Divyanshu Sood", "target": "IBPSA", "rel": "organised events for"}, {"source": "UCD Energy Institute", "target": "UCD", "rel": "part of"}, {"source": "Divyanshu Sood", "target": "Chitkara", "rel": "studied at"}, {"source": "Divyanshu Sood", "target": "TERI", "rel": "studied at"}, {"source": "Divyanshu Sood", "target": "UCD", "rel": "studied at"}]};
+const CLS=[["role","Role","--role","circle"],["teaching","Teaching & supervision","--role","square"],
+           ["project","Project","--project","circle"],["output","Output","--output","circle"],
+           ["org","Organisation","--org","circle"]];
+const HUE={person:"--person",role:"--role",teaching:"--role",project:"--project",output:"--output",org:"--org"};
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const colourOf=d=>css(HUE[d.cls]);
+
+// degree drives size, so the hubs of the career read first
+const deg={}; DATA.links.forEach(l=>{deg[l.source]=(deg[l.source]||0)+1; deg[l.target]=(deg[l.target]||0)+1;});
+DATA.nodes.forEach(n=>n.deg=deg[n.id]||0);
+const R=d=>d.cls==="person"?20:4.6+2.5*Math.sqrt(d.deg);
+const SHAPE={teaching:d3.symbolSquare};
+const sym=d=>d3.symbol().type(SHAPE[d.cls]||d3.symbolCircle)
+                .size(Math.PI*R(d)*R(d)*(d.cls==="teaching"?0.86:1))();
+const off=new Set();
+
+const legend=document.getElementById("legend");
+CLS.forEach(([k,label,v,shape])=>{
+  const b=document.createElement("button");
+  b.className="chip"; b.setAttribute("aria-pressed","true");
+  b.innerHTML='<span class="mk '+shape+'" style="background:'+css(v)+'"></span>'+label;
+  b.onclick=()=>{off.has(k)?off.delete(k):off.add(k);
+    b.setAttribute("aria-pressed",off.has(k)?"false":"true"); redraw();};
+  legend.appendChild(b);
+});
+const sp=document.createElement("div"); sp.className="spacer"; legend.appendChild(sp);
+const tb=document.createElement("button"); tb.className="plain"; tb.textContent="Table"; legend.appendChild(tb);
+const th=document.createElement("button"); th.className="plain"; th.textContent="Theme"; legend.appendChild(th);
+document.getElementById("cap").textContent=
+ "Four validated hues carry class identity and every node is directly labelled. Teaching and supervision share the Role hue but are drawn as squares, so the fifth class is distinguished by shape rather than an unvalidated fifth colour.";
+
+const svg=d3.select("#g"), tip=document.getElementById("tip");
+let link,node,sim;
+const dims=()=>{const r=document.getElementById("g").getBoundingClientRect();return [r.width,r.height];};
+
+function redraw(){
+  const nodes=DATA.nodes.filter(n=>!off.has(n.cls)).map(d=>({...d}));
+  const keep=new Set(nodes.map(n=>n.id));
+  const links=DATA.links.filter(l=>keep.has(l.source.id||l.source)&&keep.has(l.target.id||l.target))
+                        .map(l=>({...l,source:l.source.id||l.source,target:l.target.id||l.target}));
+  svg.selectAll("*").remove();
+  const [W,H]=dims();
+  const defs=svg.append("defs");
+  const f=defs.append("filter").attr("id","soft").attr("x","-55%").attr("y","-55%")
+              .attr("width","210%").attr("height","210%");
+  f.append("feDropShadow").attr("dx",0).attr("dy",1.4).attr("stdDeviation",2.2)
+   .attr("flood-opacity",.26);
+
+  link=svg.append("g").selectAll("path").data(links).join("path")
+      .attr("class","link").attr("stroke-width",1.1);
+  node=svg.append("g").selectAll("g").data(nodes).join("g")
+      .attr("class",d=>"node "+d.cls+(d.cls==="person"?" self":(d.deg>=5?" hub":"")));
+  node.append("path").attr("d",sym).attr("fill",colourOf).attr("filter","url(#soft)");
+  node.append("text").attr("x",d=>R(d)+6).attr("dy","0.34em")
+      .text(d=>d.label.length>26?d.label.slice(0,25)+"…":d.label);
+
+  node.on("pointerenter",(ev,d)=>{
+        tip.innerHTML="<b>"+d.label+"</b><span>"+(d.note||"")+"</span><i>"+
+                      (d.cls==="person"?"subject":d.cls)+" · "+d.deg+" connections</i>";
+        tip.style.opacity=1; tip.style.transform="translateY(0)"; move(ev);
+        const nb=new Set([d.id]);
+        links.forEach(l=>{if(l.source.id===d.id)nb.add(l.target.id);
+                          if(l.target.id===d.id)nb.add(l.source.id);});
+        node.style("opacity",x=>nb.has(x.id)?1:.14);
+        link.attr("stroke",l=>(l.source.id===d.id||l.target.id===d.id)?colourOf(d):null)
+            .attr("stroke-width",l=>(l.source.id===d.id||l.target.id===d.id)?1.9:1.1)
+            .style("stroke-opacity",l=>(l.source.id===d.id||l.target.id===d.id)?.95:.07);})
+      .on("pointermove",move)
+      .on("pointerleave",()=>{tip.style.opacity=0;tip.style.transform="translateY(4px)";
+        node.style("opacity",1);
+        link.attr("stroke",null).attr("stroke-width",1.1).style("stroke-opacity",null);});
+  function move(ev){tip.style.left=Math.min(ev.clientX+16,innerWidth-324)+"px";
+                    tip.style.top=Math.min(ev.clientY+18,innerHeight-150)+"px";}
+
+  const pad=16, lab=d=>Math.min(d.label.length,26)*5.5;
+  sim=d3.forceSimulation(nodes)
+    .force("link",d3.forceLink(links).id(d=>d.id)
+           .distance(d=>d.target.cls==="org"?112:142).strength(.24))
+    .force("charge",d3.forceManyBody().strength(-680).distanceMax(600))
+    .force("center",d3.forceCenter(W/2,H/2))
+    .force("x",d3.forceX(W/2).strength(.05)).force("y",d3.forceY(H/2).strength(.08))
+    .force("collide",d3.forceCollide().radius(d=>R(d)+11+lab(d)/2.6).iterations(2))
+    .on("tick",()=>{
+      nodes.forEach(d=>{d.x=Math.max(pad+R(d),Math.min(W-pad-R(d)-lab(d),d.x));
+                        d.y=Math.max(pad+R(d),Math.min(H-pad-R(d),d.y));});
+      link.attr("d",l=>{const dx=l.target.x-l.source.x, dy=l.target.y-l.source.y;
+        const dr=Math.hypot(dx,dy)*2.6;   // gentle arc, so parallel edges separate
+        return `M${l.source.x},${l.source.y}A${dr},${dr} 0 0,1 ${l.target.x},${l.target.y}`;});
+      node.attr("transform",d=>`translate(${d.x},${d.y})`);});
+
+  node.call(d3.drag()
+    .on("start",(ev,d)=>{if(!ev.active)sim.alphaTarget(.3).restart();d.fx=d.x;d.fy=d.y;})
+    .on("drag",(ev,d)=>{d.fx=ev.x;d.fy=ev.y;})
+    .on("end",(ev,d)=>{if(!ev.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}));
+
+  node.attr("opacity",0).transition().duration(520).delay((d,i)=>i*7).attr("opacity",1);
+  link.attr("opacity",0).transition().duration(520).delay(160).attr("opacity",1);
+}
+function paint(){ if(node) node.select("path").attr("fill",colourOf);
+  [...legend.querySelectorAll(".mk")].forEach((el,i)=>el.style.background=css(CLS[i][2])); }
+th.onclick=()=>{const r=document.documentElement;
+  const dark=getComputedStyle(r).getPropertyValue("--surface").trim()==="#131312";
+  r.setAttribute("data-theme",dark?"light":"dark"); paint();};
+
+const tv=document.getElementById("tableView");
+tv.innerHTML="<table><thead><tr><th>Entity</th><th>Class</th><th>Detail</th><th>Connected to</th></tr></thead><tbody>"+
+ DATA.nodes.slice().sort((a,b)=>b.deg-a.deg).map(n=>{
+   const c=DATA.links.filter(l=>l.source===n.id||l.target===n.id).map(l=>l.source===n.id?l.target:l.source);
+   return "<tr><td>"+n.label+"</td><td>"+n.cls+"</td><td>"+(n.note||"")+"</td><td>"+
+          [...new Set(c)].join(", ")+"</td></tr>";}).join("")+"</tbody></table>";
+tb.onclick=()=>{const t=tv.style.display==="block";
+  tv.style.display=t?"none":"block";
+  document.querySelector(".frame").style.display=t?"block":"none";
+  tb.textContent=t?"Table":"Graph";};
+
+redraw();
+
+/* The graph can be laid out while hidden, for example inside a tab or an iframe that
+   is not displayed yet. The SVG then measures zero and every node collapses into the
+   corner. Watch for the element gaining real size and rebuild once it has. A short
+   poll backs up the observer, because a zero-size box inside a display:none ancestor
+   does not always report a resize. */
+(function(){
+  const g=document.getElementById("g");
+  let built=dims()[0]>60;
+  function spread(){const xs=[...g.querySelectorAll(".node")]
+      .map(n=>+(n.getAttribute("transform")||"translate(0,0)").match(/translate\(([-\d.]+)/)[1]);
+    return xs.length?Math.max(...xs)-Math.min(...xs):0;}
+  function check(){
+    const [W,H]=dims();
+    if(W>60&&H>60&&(!built||spread()<W*0.25)){ built=true; redraw(); return true; }
+    return false;
+  }
+  if(window.ResizeObserver) new ResizeObserver(check).observe(g);
+  let n=0; const t=setInterval(()=>{ if(check()||++n>25) clearInterval(t); },400);
+  let r; addEventListener("resize",()=>{clearTimeout(r);
+    r=setTimeout(()=>{const [W,H]=dims(); if(W>60) redraw();},200);});
+})();
+</script></body></html>
