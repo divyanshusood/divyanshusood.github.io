@@ -1,11 +1,14 @@
 /* Tabs: plain buttons driving section visibility, with the hash kept in sync
    so a section can be linked to directly. */
 (function(){
-  const btns=[...document.querySelectorAll('nav button')];
+  const btns=[...document.querySelectorAll('nav button, .tabbar button')];
   const secs=[...document.querySelectorAll('main section')];
   function show(id,push){
     btns.forEach(b=>b.setAttribute('aria-current', String(b.dataset.go===id)));
     secs.forEach(s=>s.classList.toggle('on', s.id===id));
+    /* The graph needs the full page width, so the sidebar gives way to a
+       horizontal strip for that one section. */
+    document.body.classList.toggle('graph-wide', id==='graph');
     if(push && location.hash.slice(1)!==id) history.replaceState(null,'','#'+id);
     const h=document.getElementById(id); if(h) h.focus({preventScroll:true});
     /* Section ids double as deep links, so the browser would otherwise scroll past

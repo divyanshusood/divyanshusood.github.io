@@ -3,12 +3,73 @@
 @prefix org:  <http://www.w3.org/ns/org#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-# Knowledge graph of Divyanshu Sood, generated 2026-10-12.
+# Knowledge graph of Divyanshu Sood, generated 2026-10-17.
 # Classes: Role, TeachingActivity, Project, Output, Organization. Person is the subject.
+# 82 entities, 129 relations.
 
 kg:Divyanshu_Sood a foaf:Person ;
     rdfs:label "Divyanshu Sood" ;
-    rdfs:comment "Mechanical engineer; spatial energy systems modelling, machine learning, teaching" .
+    rdfs:comment "Mechanical engineer; spatial energy systems modelling, machine learning, teaching" ;
+    kg:holdsRole kg:Senior_Energy_Systems_Researcher ;
+    kg:holdsRole kg:Module_Coordinator ;
+    kg:holdsRole kg:Data_Theme_Lead ;
+    kg:holdsRole kg:Ireland_Representative ;
+    kg:holdsRole kg:IPCC_Reviewer ;
+    kg:holdsRole kg:Member_Engineers_Ireland ;
+    kg:holdsRole kg:NSAI_Young_Professional ;
+    kg:holdsRole kg:NSAI_Committee_Member ;
+    kg:holdsRole kg:IEC_Young_Professional ;
+    kg:holdsRole kg:Research_Assistant ;
+    kg:holdsRole kg:Doctoral_Researcher ;
+    kg:holdsRole kg:Project_Associate ;
+    kg:holdsRole kg:Junior_Research_Fellow ;
+    kg:worksOn kg:NEDT ;
+    kg:worksOn kg:Ask_NEDT ;
+    kg:worksOn kg:Overload_benchmark ;
+    kg:worksOn kg:DER_disaggregation ;
+    kg:worksOn kg:Knowledge_graph_framework ;
+    kg:worksOn kg:Last_Mile_of_Net_Zero ;
+    kg:worksOn kg:ReserveLens ;
+    kg:worksOn kg:Climate_and_electricity_systems ;
+    kg:worksOn kg:Intelligent_data_harvesting ;
+    kg:worksOn kg:V2H_charging_optimisation ;
+    kg:worksOn kg:Retrofit_carbon_assessment ;
+    kg:worksOn kg:PhD_occupancy_and_IEQ ;
+    kg:worksOn kg:Room_level_occupancy_simulator ;
+    kg:worksOn kg:Probabilistic_occupancy_model ;
+    kg:worksOn kg:PCM_envelope_optimisation ;
+    kg:worksOn kg:Vacuum_insulation_panels ;
+    kg:produced kg:19_journal_papers ;
+    kg:produced kg:13_conference_papers ;
+    kg:produced kg:Building_Environment_2024 ;
+    kg:produced kg:NeurIPS_AI4Grid_2026 ;
+    kg:produced kg:CISP_BMEI_2026 ;
+    kg:produced kg:EC3_2026_pedagogy_paper ;
+    kg:produced kg:Policy_paper ;
+    kg:produced kg:NSAI_Standards_Innovation_Award ;
+    kg:produced kg:CIBSE_Young_Modeller_Award ;
+    kg:produced kg:EU_TalentOn_2026 ;
+    kg:produced kg:EYEF_2026 ;
+    kg:produced kg:EC3_2026_knowledge_graph_paper ;
+    kg:produced kg:EC3_2026_low_code_paper ;
+    kg:produced kg:Building_Environment_2026 ;
+    kg:produced kg:Overload_label_dataset ;
+    kg:produced kg:CIBSE_Building_Simulation_Award ;
+    kg:produced kg:Thesis_in_3 ;
+    kg:teachesOrSupervises kg:Energy_Systems_in_Buildings_II ;
+    kg:teachesOrSupervises kg:Measurement_and_Instrumentation ;
+    kg:teachesOrSupervises kg:Energy_Conservation_in_Buildings ;
+    kg:teachesOrSupervises kg:Dual_assessment_design ;
+    kg:teachesOrSupervises kg:Master_s_dissertations ;
+    kg:teachesOrSupervises kg:Final_year_projects ;
+    kg:teachesOrSupervises kg:Research_interns ;
+    kg:proposalWith kg:Surrey ;
+    kg:proposalWith kg:UL ;
+    kg:organisedFor kg:ASHRAE ;
+    kg:organisedFor kg:IBPSA ;
+    kg:studiedAt kg:Chitkara ;
+    kg:studiedAt kg:TERI ;
+    kg:studiedAt kg:UCD .
 
 kg:UCD a org:Organization ;
     rdfs:label "UCD" ;
@@ -16,7 +77,8 @@ kg:UCD a org:Organization ;
 
 kg:UCD_Energy_Institute a org:Organization ;
     rdfs:label "UCD Energy Institute" ;
-    rdfs:comment "UCD Energy Institute" .
+    rdfs:comment "UCD Energy Institute" ;
+    org:subOrganizationOf kg:UCD .
 
 kg:NexSys a org:Organization ;
     rdfs:label "NexSys" ;
@@ -76,7 +138,8 @@ kg:Engineers_Ireland a org:Organization ;
 
 kg:NSAI a org:Organization ;
     rdfs:label "NSAI" ;
-    rdfs:comment "NSAI" .
+    rdfs:comment "NSAI" ;
+    kg:ledTo kg:NSAI_Standards_Innovation_Award .
 
 kg:DTU a org:Organization ;
     rdfs:label "DTU" ;
@@ -112,119 +175,195 @@ kg:ASHRAE a org:Organization ;
 
 kg:IBPSA a org:Organization ;
     rdfs:label "IBPSA" ;
-    rdfs:comment "IBPSA" .
+    rdfs:comment "IBPSA" ;
+    kg:ledTo kg:Thesis_in_3 .
+
+kg:EU_TalentOn a org:Organization ;
+    rdfs:label "EU TalentOn" ;
+    rdfs:comment "EU TalentOn, European Commission" .
+
+kg:EC3 a org:Organization ;
+    rdfs:label "EC3" ;
+    rdfs:comment "European Conference on Computing in Construction" ;
+    kg:ledTo kg:13_conference_papers ;
+    kg:ledTo kg:EC3_2026_knowledge_graph_paper ;
+    kg:ledTo kg:EC3_2026_low_code_paper .
 
 kg:Senior_Energy_Systems_Researcher a kg:Role ;
     rdfs:label "Senior Energy Systems Researcher" ;
-    rdfs:comment "Apr 2025 to present" .
+    rdfs:comment "Apr 2025 to present" ;
+    kg:heldAt kg:UCD_Energy_Institute .
 
 kg:Module_Coordinator a kg:Role ;
     rdfs:label "Module Coordinator" ;
-    rdfs:comment "Energy Systems in Buildings II, Sept 2025 to present" .
+    rdfs:comment "Energy Systems in Buildings II, Sept 2025 to present" ;
+    kg:heldAt kg:UCD ;
+    kg:ledTo kg:EC3_2026_pedagogy_paper .
 
 kg:Data_Theme_Lead a kg:Role ;
     rdfs:label "Data Theme Lead" ;
-    rdfs:comment "Data and IP Sub-Committee, from 2026" .
+    rdfs:comment "Data and IP Sub-Committee, from 2026" ;
+    kg:heldAt kg:NexSys .
 
 kg:Ireland_Representative a kg:Role ;
     rdfs:label "Ireland Representative" ;
-    rdfs:comment "IEA EBC Annex 95, six activities" .
+    rdfs:comment "IEA EBC Annex 95, six activities" ;
+    kg:heldAt kg:IEA_EBC ;
+    kg:ledTo kg:Building_Environment_2026 .
 
 kg:IPCC_Reviewer a kg:Role ;
     rdfs:label "IPCC Reviewer" ;
-    rdfs:comment "AR7 Special Report on Climate Change and Cities" .
+    rdfs:comment "AR7 Special Report on Climate Change and Cities" ;
+    kg:heldAt kg:IPCC .
 
 kg:Member_Engineers_Ireland a kg:Role ;
     rdfs:label "Member, Engineers Ireland" ;
-    rdfs:comment "MIEI; Chartered Engineer route begun" .
+    rdfs:comment "MIEI; Chartered Engineer route begun" ;
+    kg:heldAt kg:Engineers_Ireland .
 
 kg:NSAI_Young_Professional a kg:Role ;
     rdfs:label "NSAI Young Professional" ;
-    rdfs:comment "Standards participation" .
+    rdfs:comment "Standards participation" ;
+    kg:heldAt kg:NSAI .
+
+kg:NSAI_Committee_Member a kg:Role ;
+    rdfs:label "NSAI Committee Member" ;
+    rdfs:comment "Three technical committees: energy performance of buildings, retrofit, energy management" ;
+    kg:heldAt kg:NSAI .
+
+kg:IEC_Young_Professional a kg:Role ;
+    rdfs:label "IEC Young Professional" ;
+    rdfs:comment "2026; one of two Irish nominees, nominated by NSAI" ;
+    kg:heldAt kg:NSAI .
 
 kg:Research_Assistant a kg:Role ;
     rdfs:label "Research Assistant" ;
-    rdfs:comment "Oct 2024 to Mar 2025" .
+    rdfs:comment "Oct 2024 to Mar 2025" ;
+    kg:heldAt kg:UCD .
 
 kg:Doctoral_Researcher a kg:Role ;
     rdfs:label "Doctoral Researcher" ;
-    rdfs:comment "Sept 2020 to Sept 2024, SEAI ALIVE Scholarship" .
+    rdfs:comment "Sept 2020 to Sept 2024, SEAI ALIVE Scholarship" ;
+    kg:heldAt kg:UCD .
 
 kg:Project_Associate a kg:Role ;
     rdfs:label "Project Associate" ;
-    rdfs:comment "Jan to Aug 2020" .
+    rdfs:comment "Jan to Aug 2020" ;
+    kg:heldAt kg:TERI .
 
 kg:Junior_Research_Fellow a kg:Role ;
     rdfs:label "Junior Research Fellow" ;
-    rdfs:comment "Jul to Dec 2019" .
+    rdfs:comment "Jul to Dec 2019" ;
+    kg:heldAt kg:IIT_Delhi .
 
 kg:NEDT a kg:Project ;
     rdfs:label "NEDT" ;
-    rdfs:comment "National Energy Digital Twin: dwellings to LV transformer districts; scenarios, thermal ageing, driver attribution" .
+    rdfs:comment "National Energy Digital Twin: dwellings to LV transformer districts; scenarios, thermal ageing, driver attribution" ;
+    kg:partner kg:UCD_Energy_Institute ;
+    kg:partner kg:NexSys ;
+    kg:partner kg:ESB ;
+    kg:presentedTo kg:SEAI ;
+    kg:presentedTo kg:ESB ;
+    kg:presentedTo kg:Bus_Eireann ;
+    kg:presentedTo kg:Wind_Energy_Ireland ;
+    kg:presentedTo kg:EPRI .
 
 kg:Ask_NEDT a kg:Project ;
     rdfs:label "Ask NEDT" ;
-    rdfs:comment "Retrieval-augmented interface; retrieve-or-compute routing and evaluation harness" .
+    rdfs:comment "Retrieval-augmented interface; retrieve-or-compute routing and evaluation harness" ;
+    kg:partner kg:UCD_Energy_Institute .
 
 kg:Overload_benchmark a kg:Project ;
     rdfs:label "Overload benchmark" ;
-    rdfs:comment "Reliability of ML for transformer overload screening under distribution shift" .
+    rdfs:comment "Reliability of ML for transformer overload screening under distribution shift" ;
+    kg:partner kg:UCD_Energy_Institute ;
+    kg:ledTo kg:NeurIPS_AI4Grid_2026 ;
+    kg:ledTo kg:Overload_label_dataset .
 
 kg:DER_disaggregation a kg:Project ;
     rdfs:label "DER disaggregation" ;
-    rdfs:comment "Heat pump, EV and solar adoption from aggregate feeder signals" .
+    rdfs:comment "Heat pump, EV and solar adoption from aggregate feeder signals" ;
+    kg:partner kg:UCD_Energy_Institute ;
+    kg:ledTo kg:CISP_BMEI_2026 .
 
 kg:Knowledge_graph_framework a kg:Project ;
     rdfs:label "Knowledge graph framework" ;
-    rdfs:comment "Transformer-level planning with traceable provenance" .
+    rdfs:comment "Transformer-level planning with traceable provenance" ;
+    kg:partner kg:UCD_Energy_Institute ;
+    kg:ledTo kg:EC3_2026_knowledge_graph_paper ;
+    kg:ledTo kg:EC3_2026_low_code_paper .
 
 kg:Last_Mile_of_Net_Zero a kg:Project ;
     rdfs:label "Last Mile of Net Zero" ;
-    rdfs:comment "Urban versus rural electrification glide-paths" .
+    rdfs:comment "Urban versus rural electrification glide-paths" ;
+    kg:partner kg:UCD_Energy_Institute .
 
 kg:ReserveLens a kg:Project ;
     rdfs:label "ReserveLens" ;
-    rdfs:comment "Grid services from data centre UPS batteries; safety as a hard constraint" .
+    rdfs:comment "Grid services from data centre UPS batteries; safety as a hard constraint" ;
+    kg:partner kg:EU_TalentOn ;
+    kg:ledTo kg:EU_TalentOn_2026 .
 
 kg:Climate_and_electricity_systems a kg:Project ;
     rdfs:label "Climate and electricity systems" ;
-    rdfs:comment "Seven-person multi-disciplinary UCD team" .
+    rdfs:comment "Seven-person multi-disciplinary UCD team" ;
+    kg:partner kg:UCD .
 
 kg:Intelligent_data_harvesting a kg:Project ;
     rdfs:label "Intelligent data harvesting" ;
-    rdfs:comment "Computer vision and generative methods for building stock classification" .
+    rdfs:comment "Computer vision and generative methods for building stock classification" ;
+    kg:partner kg:UCD ;
+    kg:ledTo kg:Building_Environment_2024 .
 
 kg:V2H_charging_optimisation a kg:Project ;
     rdfs:label "V2H charging optimisation" ;
-    rdfs:comment "Cost-minimising charging under tariffs; peak load cut by half" .
+    rdfs:comment "Cost-minimising charging under tariffs; peak load cut by half" ;
+    kg:partner kg:UCD .
 
 kg:Retrofit_carbon_assessment a kg:Project ;
     rdfs:label "Retrofit carbon assessment" ;
-    rdfs:comment "Operational and embodied carbon across a social housing portfolio" .
+    rdfs:comment "Operational and embodied carbon across a social housing portfolio" ;
+    kg:partner kg:ARUP ;
+    kg:partner kg:PMVT .
 
 kg:PhD_occupancy_and_IEQ a kg:Project ;
     rdfs:label "PhD: occupancy and IEQ" ;
-    rdfs:comment "Bayesian neural networks and hidden Markov models; sensors in occupied homes" .
+    rdfs:comment "Bayesian neural networks and hidden Markov models; sensors in occupied homes" ;
+    kg:partner kg:UCD ;
+    kg:ledTo kg:Policy_paper ;
+    kg:adoptedBy kg:CODEMA ;
+    kg:adoptedBy kg:TU_Dublin ;
+    kg:adoptedBy kg:Defence_Forces ;
+    kg:adoptedBy kg:ARUP ;
+    kg:adoptedBy kg:PMVT .
 
 kg:Room_level_occupancy_simulator a kg:Project ;
     rdfs:label "Room-level occupancy simulator" ;
-    rdfs:comment "Research visit" .
+    rdfs:comment "Research visit" ;
+    kg:partner kg:DTU .
 
 kg:Probabilistic_occupancy_model a kg:Project ;
     rdfs:label "Probabilistic occupancy model" ;
-    rdfs:comment "Research visit" .
+    rdfs:comment "Research visit" ;
+    kg:partner kg:UCL .
 
 kg:PCM_envelope_optimisation a kg:Project ;
     rdfs:label "PCM envelope optimisation" ;
-    rdfs:comment "Phase change materials, DSC over 1000 cycles, genetic algorithm" .
+    rdfs:comment "Phase change materials, DSC over 1000 cycles, genetic algorithm" ;
+    kg:partner kg:IIT_Delhi .
 
 kg:Vacuum_insulation_panels a kg:Project ;
     rdfs:label "Vacuum insulation panels" ;
-    rdfs:comment "Real-gas conductivity model; service life revised down" .
+    rdfs:comment "Real-gas conductivity model; service life revised down" ;
+    kg:partner kg:IIT_Delhi .
 
-kg:16_journal_papers a kg:Output ;
-    rdfs:label "16 journal papers" ;
-    rdfs:comment "Q1 journals, 500+ citations, h-index 9" .
+kg:19_journal_papers a kg:Output ;
+    rdfs:label "19 journal papers" ;
+    rdfs:comment "Q1 journals, 659 citations, h-index 10, i10-index 10" .
+
+kg:13_conference_papers a kg:Output ;
+    rdfs:label "13 conference papers" ;
+    rdfs:comment "Peer-reviewed, including three at EC3 2026" .
 
 kg:Building_Environment_2024 a kg:Output ;
     rdfs:label "Building & Environment 2024" ;
@@ -260,144 +399,67 @@ kg:EU_TalentOn_2026 a kg:Output ;
 
 kg:EYEF_2026 a kg:Output ;
     rdfs:label "EYEF 2026" ;
-    rdfs:comment "Selected participant" .
+    rdfs:comment "European Youth Energy Forum, one of 100 participants worldwide, Nice" .
+
+kg:EC3_2026_knowledge_graph_paper a kg:Output ;
+    rdfs:label "EC3 2026 knowledge graph paper" ;
+    rdfs:comment "A utility-aware knowledge graph to support multi-scale residential energy modelling" .
+
+kg:EC3_2026_low_code_paper a kg:Output ;
+    rdfs:label "EC3 2026 low-code paper" ;
+    rdfs:comment "Low-code toolchain development to accelerate data-driven energy modelling" .
+
+kg:Building_Environment_2026 a kg:Output ;
+    rdfs:label "Building & Environment 2026" ;
+    rdfs:comment "A review of research on multi-stakeholder approaches to sustainable built environments" .
+
+kg:Overload_label_dataset a kg:Output ;
+    rdfs:label "Overload label dataset" ;
+    rdfs:comment "Station-level overload and thermal-risk labels, published on Zenodo; sole author" .
+
+kg:CIBSE_Building_Simulation_Award a kg:Output ;
+    rdfs:label "CIBSE Building Simulation Award" ;
+    rdfs:comment "2024, runner up" .
+
+kg:Thesis_in_3 a kg:Output ;
+    rdfs:label "Thesis in 3" ;
+    rdfs:comment "2024, winner, IBPSA Ireland symposium" .
 
 kg:Energy_Systems_in_Buildings_II a kg:TeachingActivity ;
     rdfs:label "Energy Systems in Buildings II" ;
-    rdfs:comment "Core postgraduate module; thermodynamics, heat transfer, fluid dynamics, psychrometrics, load calculation, HVAC design" .
+    rdfs:comment "Core postgraduate module; thermodynamics, heat transfer, fluid dynamics, psychrometrics, load calculation, HVAC design" ;
+    kg:heldAt kg:UCD ;
+    kg:coordinatedAs kg:Module_Coordinator .
 
 kg:Measurement_and_Instrumentation a kg:TeachingActivity ;
     rdfs:label "Measurement and Instrumentation" ;
-    rdfs:comment "Teaching assistant, 2020 to 2023" .
+    rdfs:comment "Teaching assistant, 2020 to 2023" ;
+    kg:heldAt kg:UCD .
 
 kg:Energy_Conservation_in_Buildings a kg:TeachingActivity ;
     rdfs:label "Energy Conservation in Buildings" ;
-    rdfs:comment "Teaching assistant, 2019" .
+    rdfs:comment "Teaching assistant, 2019" ;
+    kg:heldAt kg:IIT_Delhi .
 
 kg:Dual_assessment_design a kg:TeachingActivity ;
     rdfs:label "Dual-assessment design" ;
-    rdfs:comment "Half lectures, half project work; building simulation in IES VE, moved from Simergy" .
+    rdfs:comment "Half lectures, half project work; building simulation in IES VE, moved from Simergy" ;
+    kg:appliedTo kg:Energy_Systems_in_Buildings_II ;
+    kg:evaluatedIn kg:EC3_2026_pedagogy_paper .
 
 kg:Master_s_dissertations a kg:TeachingActivity ;
     rdfs:label "Master's dissertations" ;
-    rdfs:comment "Co-supervision of taught ME and MSc dissertation projects" .
+    rdfs:comment "Co-supervision of taught ME and MSc dissertation projects" ;
+    kg:heldAt kg:UCD .
 
 kg:Final_year_projects a kg:TeachingActivity ;
     rdfs:label "Final-year projects" ;
-    rdfs:comment "Co-supervision of undergraduate final-year projects" .
+    rdfs:comment "Co-supervision of undergraduate final-year projects" ;
+    kg:heldAt kg:UCD .
 
 kg:Research_interns a kg:TeachingActivity ;
     rdfs:label "Research interns" ;
-    rdfs:comment "Two interns on life cycle assessment of retrofit strategies; recruiting one for the digital twin" .
-
-# ---- relations ----
-kg:Divyanshu_Sood kg:holdsRole kg:Senior_Energy_Systems_Researcher .
-kg:Senior_Energy_Systems_Researcher kg:heldAt kg:UCD_Energy_Institute .
-kg:Divyanshu_Sood kg:holdsRole kg:Module_Coordinator .
-kg:Module_Coordinator kg:heldAt kg:UCD .
-kg:Divyanshu_Sood kg:holdsRole kg:Data_Theme_Lead .
-kg:Data_Theme_Lead kg:heldAt kg:NexSys .
-kg:Divyanshu_Sood kg:holdsRole kg:Ireland_Representative .
-kg:Ireland_Representative kg:heldAt kg:IEA_EBC .
-kg:Divyanshu_Sood kg:holdsRole kg:IPCC_Reviewer .
-kg:IPCC_Reviewer kg:heldAt kg:IPCC .
-kg:Divyanshu_Sood kg:holdsRole kg:Member_Engineers_Ireland .
-kg:Member_Engineers_Ireland kg:heldAt kg:Engineers_Ireland .
-kg:Divyanshu_Sood kg:holdsRole kg:NSAI_Young_Professional .
-kg:NSAI_Young_Professional kg:heldAt kg:NSAI .
-kg:Divyanshu_Sood kg:holdsRole kg:Research_Assistant .
-kg:Research_Assistant kg:heldAt kg:UCD .
-kg:Divyanshu_Sood kg:holdsRole kg:Doctoral_Researcher .
-kg:Doctoral_Researcher kg:heldAt kg:UCD .
-kg:Divyanshu_Sood kg:holdsRole kg:Project_Associate .
-kg:Project_Associate kg:heldAt kg:TERI .
-kg:Divyanshu_Sood kg:holdsRole kg:Junior_Research_Fellow .
-kg:Junior_Research_Fellow kg:heldAt kg:IIT_Delhi .
-kg:Divyanshu_Sood kg:worksOn kg:NEDT .
-kg:NEDT kg:partner kg:UCD_Energy_Institute .
-kg:NEDT kg:partner kg:NexSys .
-kg:NEDT kg:partner kg:ESB .
-kg:Divyanshu_Sood kg:worksOn kg:Ask_NEDT .
-kg:Ask_NEDT kg:partner kg:UCD_Energy_Institute .
-kg:Divyanshu_Sood kg:worksOn kg:Overload_benchmark .
-kg:Overload_benchmark kg:partner kg:UCD_Energy_Institute .
-kg:Divyanshu_Sood kg:worksOn kg:DER_disaggregation .
-kg:DER_disaggregation kg:partner kg:UCD_Energy_Institute .
-kg:Divyanshu_Sood kg:worksOn kg:Knowledge_graph_framework .
-kg:Knowledge_graph_framework kg:partner kg:UCD_Energy_Institute .
-kg:Divyanshu_Sood kg:worksOn kg:Last_Mile_of_Net_Zero .
-kg:Last_Mile_of_Net_Zero kg:partner kg:UCD_Energy_Institute .
-kg:Divyanshu_Sood kg:worksOn kg:ReserveLens .
-kg:ReserveLens kg:partner kg:EPRI .
-kg:Divyanshu_Sood kg:worksOn kg:Climate_and_electricity_systems .
-kg:Climate_and_electricity_systems kg:partner kg:UCD .
-kg:Divyanshu_Sood kg:worksOn kg:Intelligent_data_harvesting .
-kg:Intelligent_data_harvesting kg:partner kg:UCD .
-kg:Divyanshu_Sood kg:worksOn kg:V2H_charging_optimisation .
-kg:V2H_charging_optimisation kg:partner kg:UCD .
-kg:Divyanshu_Sood kg:worksOn kg:Retrofit_carbon_assessment .
-kg:Retrofit_carbon_assessment kg:partner kg:ARUP .
-kg:Retrofit_carbon_assessment kg:partner kg:PMVT .
-kg:Divyanshu_Sood kg:worksOn kg:PhD_occupancy_and_IEQ .
-kg:PhD_occupancy_and_IEQ kg:partner kg:UCD .
-kg:Divyanshu_Sood kg:worksOn kg:Room_level_occupancy_simulator .
-kg:Room_level_occupancy_simulator kg:partner kg:DTU .
-kg:Divyanshu_Sood kg:worksOn kg:Probabilistic_occupancy_model .
-kg:Probabilistic_occupancy_model kg:partner kg:UCL .
-kg:Divyanshu_Sood kg:worksOn kg:PCM_envelope_optimisation .
-kg:PCM_envelope_optimisation kg:partner kg:IIT_Delhi .
-kg:Divyanshu_Sood kg:worksOn kg:Vacuum_insulation_panels .
-kg:Vacuum_insulation_panels kg:partner kg:IIT_Delhi .
-kg:Divyanshu_Sood kg:produced kg:16_journal_papers .
-kg:Divyanshu_Sood kg:produced kg:Building_Environment_2024 .
-kg:Intelligent_data_harvesting kg:ledTo kg:Building_Environment_2024 .
-kg:Divyanshu_Sood kg:produced kg:NeurIPS_AI4Grid_2026 .
-kg:Overload_benchmark kg:ledTo kg:NeurIPS_AI4Grid_2026 .
-kg:Divyanshu_Sood kg:produced kg:CISP_BMEI_2026 .
-kg:DER_disaggregation kg:ledTo kg:CISP_BMEI_2026 .
-kg:Divyanshu_Sood kg:produced kg:EC3_2026_pedagogy_paper .
-kg:Module_Coordinator kg:ledTo kg:EC3_2026_pedagogy_paper .
-kg:Divyanshu_Sood kg:produced kg:Policy_paper .
-kg:PhD_occupancy_and_IEQ kg:ledTo kg:Policy_paper .
-kg:Divyanshu_Sood kg:produced kg:NSAI_Standards_Innovation_Award .
-kg:NSAI kg:ledTo kg:NSAI_Standards_Innovation_Award .
-kg:Divyanshu_Sood kg:produced kg:CIBSE_Young_Modeller_Award .
-kg:Divyanshu_Sood kg:produced kg:EU_TalentOn_2026 .
-kg:ReserveLens kg:ledTo kg:EU_TalentOn_2026 .
-kg:Divyanshu_Sood kg:produced kg:EYEF_2026 .
-kg:Divyanshu_Sood kg:teachesOrSupervises kg:Energy_Systems_in_Buildings_II .
-kg:Energy_Systems_in_Buildings_II kg:heldAt kg:UCD .
-kg:Divyanshu_Sood kg:teachesOrSupervises kg:Measurement_and_Instrumentation .
-kg:Measurement_and_Instrumentation kg:heldAt kg:UCD .
-kg:Divyanshu_Sood kg:teachesOrSupervises kg:Energy_Conservation_in_Buildings .
-kg:Energy_Conservation_in_Buildings kg:heldAt kg:IIT_Delhi .
-kg:Divyanshu_Sood kg:teachesOrSupervises kg:Dual_assessment_design .
-kg:Divyanshu_Sood kg:teachesOrSupervises kg:Master_s_dissertations .
-kg:Master_s_dissertations kg:heldAt kg:UCD .
-kg:Divyanshu_Sood kg:teachesOrSupervises kg:Final_year_projects .
-kg:Final_year_projects kg:heldAt kg:UCD .
-kg:Divyanshu_Sood kg:teachesOrSupervises kg:Research_interns .
-kg:Research_interns kg:heldAt kg:ARUP .
-kg:Research_interns kg:heldAt kg:PMVT .
-kg:Energy_Systems_in_Buildings_II kg:coordinatedAs kg:Module_Coordinator .
-kg:Dual_assessment_design kg:appliedTo kg:Energy_Systems_in_Buildings_II .
-kg:Dual_assessment_design kg:evaluatedIn kg:EC3_2026_pedagogy_paper .
-kg:Research_interns kg:contributesTo kg:NEDT .
-kg:PhD_occupancy_and_IEQ kg:adoptedBy kg:CODEMA .
-kg:PhD_occupancy_and_IEQ kg:adoptedBy kg:TU_Dublin .
-kg:PhD_occupancy_and_IEQ kg:adoptedBy kg:Defence_Forces .
-kg:PhD_occupancy_and_IEQ kg:adoptedBy kg:ARUP .
-kg:PhD_occupancy_and_IEQ kg:adoptedBy kg:PMVT .
-kg:NEDT kg:presentedTo kg:SEAI .
-kg:NEDT kg:presentedTo kg:ESB .
-kg:NEDT kg:presentedTo kg:Bus_Eireann .
-kg:NEDT kg:presentedTo kg:Wind_Energy_Ireland .
-kg:NEDT kg:presentedTo kg:EPRI .
-kg:Divyanshu_Sood kg:proposalWith kg:Surrey .
-kg:Divyanshu_Sood kg:proposalWith kg:UL .
-kg:Divyanshu_Sood kg:organisedFor kg:ASHRAE .
-kg:Divyanshu_Sood kg:organisedFor kg:IBPSA .
-kg:UCD_Energy_Institute org:subOrganizationOf kg:UCD .
-kg:Divyanshu_Sood kg:studiedAt kg:Chitkara .
-kg:Divyanshu_Sood kg:studiedAt kg:TERI .
-kg:Divyanshu_Sood kg:studiedAt kg:UCD .
+    rdfs:comment "Two interns on life cycle assessment of retrofit strategies; recruiting one for the digital twin" ;
+    kg:heldAt kg:ARUP ;
+    kg:heldAt kg:PMVT ;
+    kg:contributesTo kg:NEDT .

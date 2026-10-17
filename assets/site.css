@@ -76,7 +76,7 @@ section > p, li > p{max-width:var(--measure)}
 .tag{font-size:12.5px;color:var(--sec);border:1px solid var(--rule);border-radius:3px;padding:3px 9px}
 
 .frame{border:1px solid var(--rule);border-radius:4px;overflow:hidden;margin-top:18px;background:var(--wash)}
-.frame iframe{display:block;width:100%;height:78vh;min-height:560px;border:0}
+.frame iframe{display:block;width:100%;height:84vh;min-height:660px;border:0}
 
 .contact{margin:0;padding:0;list-style:none}
 .contact li{padding:9px 0;border-bottom:1px solid var(--rule);font-size:16px;
@@ -126,3 +126,16 @@ details.cite-data table{border-collapse:collapse;margin:10px 0 0;font-size:13.5p
 details.cite-data th,details.cite-data td{text-align:right;padding:4px 14px 4px 0;
   border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums}
 details.cite-data th{color:var(--sec);font-weight:500}
+
+/* ---------- graph tab: the force layout needs the whole page width ---------- */
+body.graph-wide .shell{max-width:1520px}
+body.graph-wide nav{display:none}
+body.graph-wide .shell{grid-template-columns:minmax(0,1fr)}
+body.graph-wide .tabbar{display:flex}
+.tabbar{display:none;gap:4px;flex-wrap:wrap;margin:0 0 14px;padding:0;list-style:none}
+.tabbar li{margin:0}
+.tabbar button{border:1px solid var(--rule);background:var(--paper);cursor:pointer;
+  font-family:"Space Grotesk",sans-serif;font-size:13.5px;color:var(--sec);
+  padding:6px 13px;border-radius:999px;transition:color .15s,border-color .15s}
+.tabbar button:hover{color:var(--ink)}
+.tabbar button[aria-current="true"]{color:var(--ink);border-color:var(--signal)}
