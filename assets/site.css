@@ -96,3 +96,33 @@ footer{border-top:1px solid var(--rule);margin-top:10px;padding:22px 0 0;
   .hero-in{padding:56px 24px 48px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- scholar metrics: stat row and citations-per-year chart ---------- */
+.metrics{display:flex;flex-wrap:wrap;gap:34px;margin:0 0 6px;padding:0;list-style:none}
+.metrics li{margin:0}
+.metrics b{display:block;font-family:"Space Grotesk",sans-serif;font-weight:500;
+  font-size:30px;line-height:1.05;letter-spacing:-.02em;color:var(--ink)}
+.metrics span{font-family:"Space Grotesk",sans-serif;font-size:13px;color:var(--sec)}
+
+.cite-chart{display:block;width:100%;height:auto;max-width:600px;margin:22px 0 4px;overflow:visible}
+.cite-chart .grid{stroke:var(--rule);stroke-width:1}
+.cite-chart .axis{stroke:var(--muted);stroke-width:1}
+.cite-chart .ytick{fill:var(--muted);font-family:"Space Grotesk",sans-serif;font-size:10.5px;text-anchor:end}
+.cite-chart .xtick{fill:var(--sec);font-family:"Space Grotesk",sans-serif;font-size:11.5px;text-anchor:middle}
+.cite-chart .vlabel{fill:var(--ink);font-family:"Space Grotesk",sans-serif;font-size:12px;
+  font-weight:500;text-anchor:middle}
+.cite-chart .vlabel.partial{fill:var(--sec)}
+.cite-chart .bar rect{fill:var(--deep);transition:fill .12s}
+.cite-chart .bar.partial rect{fill:var(--signal)}
+.cite-chart .bar:hover rect{fill:var(--ink)}
+@media (prefers-reduced-motion:reduce){.cite-chart .bar rect{transition:none}}
+
+.chart-note{font-size:13px;line-height:1.5;color:var(--muted);max-width:60ch;margin:2px 0 0}
+.chart-note a{color:var(--muted);border-bottom-color:var(--rule)}
+.chart-note a:hover{color:var(--deep);border-bottom-color:var(--deep)}
+details.cite-data{margin:10px 0 0;font-size:13.5px}
+details.cite-data summary{cursor:pointer;color:var(--sec);font-family:"Space Grotesk",sans-serif;font-size:13px}
+details.cite-data table{border-collapse:collapse;margin:10px 0 0;font-size:13.5px}
+details.cite-data th,details.cite-data td{text-align:right;padding:4px 14px 4px 0;
+  border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums}
+details.cite-data th{color:var(--sec);font-weight:500}
