@@ -86,12 +86,12 @@ const R=d=>d.cls==="person"?20:4.6+2.5*Math.sqrt(d.deg);
 const SHAPE={teaching:d3.symbolSquare};
 const sym=d=>d3.symbol().type(SHAPE[d.cls]||d3.symbolCircle)
                 .size(Math.PI*R(d)*R(d)*(d.cls==="teaching"?0.86:1))();
-const off=new Set();
+const off=new Set(["org"]);
 
 const legend=document.getElementById("legend");
 CLS.forEach(([k,label,v,shape])=>{
   const b=document.createElement("button");
-  b.className="chip"; b.setAttribute("aria-pressed","true");
+  b.className="chip"; b.setAttribute("aria-pressed", off.has(k)?"false":"true");
   b.innerHTML='<span class="mk '+shape+'" style="background:'+css(v)+'"></span>'+label;
   b.onclick=()=>{off.has(k)?off.delete(k):off.add(k);
     b.setAttribute("aria-pressed",off.has(k)?"false":"true"); redraw();};
@@ -101,7 +101,7 @@ const sp=document.createElement("div"); sp.className="spacer"; legend.appendChil
 const tb=document.createElement("button"); tb.className="plain"; tb.textContent="Table"; legend.appendChild(tb);
 const th=document.createElement("button"); th.className="plain"; th.textContent="Theme"; legend.appendChild(th);
 document.getElementById("cap").textContent=
- "Four validated hues carry class identity and every node is directly labelled. Teaching and supervision share the Role hue but are drawn as squares, so the fifth class is distinguished by shape rather than an unvalidated fifth colour.";
+ "Organisations are hidden to begin with, so the opening view is the work itself; the Organisation chip brings them back. Four validated hues carry class identity and every node is directly labelled. Teaching and supervision share the Role hue but are drawn as squares, so the fifth class is distinguished by shape rather than an unvalidated fifth colour.";
 
 const svg=d3.select("#g"), tip=document.getElementById("tip");
 let link,node,sim;
@@ -126,7 +126,7 @@ function redraw(){
       .attr("class",d=>"node "+d.cls+(d.cls==="person"?" self":(d.deg>=5?" hub":"")));
   node.append("path").attr("d",sym).attr("fill",colourOf).attr("filter","url(#soft)");
   node.append("text").attr("x",d=>R(d)+6).attr("dy","0.34em")
-      .text(d=>d.label.length>26?d.label.slice(0,25)+"…":d.label);
+      .text(d=>d.label.length>22?d.label.slice(0,21)+"…":d.label);
 
   node.on("pointerenter",(ev,d)=>{
         tip.innerHTML="<b>"+d.label+"</b><span>"+(d.note||"")+"</span><i>"+
@@ -146,14 +146,14 @@ function redraw(){
   function move(ev){tip.style.left=Math.min(ev.clientX+16,innerWidth-324)+"px";
                     tip.style.top=Math.min(ev.clientY+18,innerHeight-150)+"px";}
 
-  const pad=16, lab=d=>Math.min(d.label.length,26)*5.5;
+  const pad=16, lab=d=>Math.min(d.label.length,22)*5.5;
   sim=d3.forceSimulation(nodes)
     .force("link",d3.forceLink(links).id(d=>d.id)
-           .distance(d=>d.target.cls==="org"?150:198).strength(.2))
-    .force("charge",d3.forceManyBody().strength(-1150).distanceMax(900))
+           .distance(d=>d.target.cls==="org"?118:156).strength(.18))
+    .force("charge",d3.forceManyBody().strength(-900).distanceMax(750))
     .force("center",d3.forceCenter(W/2,H/2))
     .force("x",d3.forceX(W/2).strength(.03)).force("y",d3.forceY(H/2).strength(.055))
-    .force("collide",d3.forceCollide().radius(d=>R(d)+17+lab(d)/2.1).iterations(3))
+    .force("collide",d3.forceCollide().radius(d=>R(d)+19+lab(d)/2.0).iterations(3))
     .on("tick",()=>{
       nodes.forEach(d=>{d.x=Math.max(pad+R(d),Math.min(W-pad-R(d)-lab(d),d.x));
                         d.y=Math.max(pad+R(d),Math.min(H-pad-R(d),d.y));});
