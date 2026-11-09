@@ -14,9 +14,10 @@
   <svg id="voronoi" aria-hidden="true"></svg>
   <div class="hero-in">
     <h1>Divyanshu Sood</h1>
-    <p>I work out where electrification actually lands. Not how much electricity a country will
-       need, but which transformer districts reach their limit first, which are ageing thermally,
-       and what a planner should do about it.</p>
+    <p>National energy targets are set in totals. Every heat pump and every car charger,
+       however, connects to a single low-voltage transformer. I build spatial models that
+       identify which of those transformers reach their limit first, which are ageing
+       thermally, and what a planner should do next.</p>
     <div class="hero-where">
       <b>Senior Energy Systems Researcher</b>, UCD Energy Institute &nbsp;·&nbsp;
       <b>Module Coordinator</b>, Energy Systems in Buildings II &nbsp;·&nbsp;
@@ -40,24 +41,25 @@
 
 <section id="overview" class="on" tabindex="-1">
   <h2>Overview</h2>
-  <p class="lede">A mechanical engineer working on energy systems at national scale. I build
-  spatially explicit models of the Irish building stock and the electricity network it loads,
-  train and test the machine learning that runs on them, and teach the thermodynamics and fluid
-  mechanics underneath.</p>
+  <p class="lede">I am a mechanical engineer working on energy systems at national scale. I
+  build spatially explicit models of the Irish building stock and of the electricity network
+  that serves it. I train and test the machine learning that runs on those models. I also teach
+  the thermodynamics and fluid mechanics underneath them.</p>
 
-  <p>The thread through everything is the gap between a national target and a local consequence.
-  Every heat pump and every car charger connects to a low-voltage network that was designed for
-  neither. Planning runs on national totals, so the question of which transformer fails first,
-  in which settlement, went unanswered. Most of my work is some version of answering it.</p>
+  <p>Two questions run through the work. First, where does a national target actually land?
+  Electrification is planned in national totals, but every heat pump and every car charger
+  connects to a low-voltage network that was built for neither. Which transformer reaches its
+  limit first, and in which settlement, is rarely asked and harder to answer. Most of my work is
+  some version of answering it.</p>
 
-  <p>The second thread is whether a model deserves to be believed. A model that informs a
-  statutory decision carries a different burden from one that produces a figure for a paper, and
-  much of my recent work is about establishing where that burden is and is not met.</p>
+  <p>Secondly, does a model deserve to be believed? A model that informs a statutory decision
+  carries a different burden from one that produces a figure for a paper. Much of my recent work
+  tests where that burden is met and where it is not.</p>
 
   <ul class="metrics">
-    <li><b>659</b><span>citations</span></li>
+    <li><b>678</b><span>citations</span></li>
     <li><b>10</b><span>h-index</span></li>
-    <li><b>16</b><span>journal papers</span></li>
+    <li><b>19</b><span>journal papers</span></li>
   </ul>
 
   <ul class="tags">
@@ -71,39 +73,44 @@
   <h2>Research</h2>
 
   <h3>National Energy Digital Twin</h3>
-  <p>A spatially explicit model linking Irish dwellings to the low-voltage transformer districts
-  that serve them, assembled from census small-area statistics, the national building energy
-  rating register, address data and network asset records. A user sets retrofit, heat pump,
-  electric vehicle and rooftop solar uptake and sees which districts breach capacity, which
-  transformers are ageing thermally rather than briefly peaking, which technology caused each
-  breach, and how heat demand density shifts. The output is a ranked reinforcement list rather
-  than a national demand curve. I lead the modelling.</p>
-  <div class="find"><b>Method.</b> Assigning each dwelling to the transformer minimising distance
-  divided by the square root of rated capacity, with concave-hull catchment boundaries, cut
-  spurious overload artefacts by 71 per cent against nearest-station assignment and eliminated
-  every case above 1000 per cent utilisation.</div>
+  <p>Built a spatially explicit model that links Irish dwellings to the low-voltage transformer
+  districts serving them. The inputs are census small-area statistics, the national building
+  energy rating register, address data and network asset records. A user sets retrofit, heat
+  pump, electric vehicle and rooftop solar uptake. The model then returns which districts breach
+  capacity, which transformers are ageing thermally rather than briefly peaking, which
+  technology caused each breach, and how heat demand density shifts. <b>Output:</b> a ranked
+  reinforcement list rather than a national demand curve. I lead the modelling.</p>
+  <div class="find"><b>Method.</b> Assigned each dwelling to the transformer that minimises
+  distance divided by the square root of rated capacity, with concave-hull catchment boundaries.
+  This cut spurious overload artefacts by 71 per cent against nearest-station assignment, and
+  removed every case above 1000 per cent utilisation.</div>
 
   <h3>Whether a learned model can be trusted on a real network</h3>
-  <p>A benchmark for transformer overload screening across 36,997 stations and 128 electrification
-  scenarios, tested under both scenario shift and leave-one-county-out geographic shift.</p>
-  <div class="find"><b>Finding.</b> Selecting models on accuracy leaves validation error flat while
-  degrading the safety-relevant error, raising missed at-risk stations from 30 to 38 per cent
-  beyond the training range. The apparent ranking between models inverts once the flagged rate is
-  equalised. And two spatial assignments that agree nationally to numerical precision still
-  disagree on 4.5 per cent of overload labels, so part of the uncertainty is irreducible without
-  operator data.</div>
+  <p>Machine learning is increasingly used to screen distribution networks for overload.
+  Whether a model trained on one set of scenarios still holds beyond them is rarely tested.
+  Built a benchmark covering 36,997 stations and 128 electrification scenarios, and tested it
+  under scenario shift and under leave-one-county-out geographic shift.</p>
+  <div class="find"><b>Findings.</b> First, selecting models on accuracy leaves validation error
+  flat while degrading the safety-relevant error: missed at-risk stations rise from 30 to 38 per
+  cent beyond the training range. Secondly, the apparent ranking between models inverts once the
+  flagged rate is equalised. Third, two spatial assignments that agree nationally to numerical
+  precision still disagree on 4.5 per cent of overload labels, so part of the uncertainty is
+  irreducible without operator data.</div>
 
   <h3>Recovering what is behind a feeder</h3>
   <p>Network planning needs to know how many heat pumps, electric vehicles and rooftop solar
-  systems sit behind a feeder, and often nobody does. This work recovers adoption fractions from a
-  single year of aggregate hourly load by exploiting each technology's distinct time-frequency
-  signature, comparing five estimators from interpretable dictionaries to neural networks.</p>
+  systems sit behind a feeder. In most cases nobody does. Each technology leaves a distinct
+  time-frequency signature in the load it draws. This work recovers adoption fractions from a
+  single year of aggregate hourly load by separating those signatures, and compares five
+  estimators ranging from interpretable dictionaries to neural networks.</p>
 
   <h3>Cities and towns do not face the same problem</h3>
-  <p>A glide-path study across two contrasting feeders found that a rural town network on 50 kVA
-  pole-mounted transformers reaches its limits at far lower adoption than a Dublin suburb on
-  400 kVA units, so a uniform national target produces very different stress depending on where
-  you live.</p>
+  <p>Electrification targets are set nationally and applied uniformly. The networks they land
+  on are not uniform. Ran a glide-path study across two contrasting feeders: a Dublin suburb on
+  400 kVA ground-mounted transformers, and a rural town in Co. Leitrim on 50 kVA pole-mounted
+  units. The rural network reaches its limits at far lower adoption. <b>Output:</b> a case for
+  differentiating the reinforcement pathway by settlement type rather than by national
+  average.</p>
 
   <h3>All projects</h3>
   <ul class="rows">
@@ -137,12 +144,12 @@
   <p>Nineteen peer-reviewed journal articles, thirteen conference papers, two book chapters, a policy paper and a granted patent.</p>
 
   <ul class="metrics">
-    <li><b>659</b><span>citations</span></li>
+    <li><b>678</b><span>citations</span></li>
     <li><b>10</b><span>h-index</span></li>
     <li><b>10</b><span>i10-index</span></li>
   </ul>
 
-  <svg class="cite-chart" viewBox="0 0 560 172" role="img" aria-label="Citations per year from 2020 to 2026: 5, 20, 39, 55, 109, 240, 189. 2026 is a partial year.">
+  <svg class="cite-chart" viewBox="0 0 560 172" role="img" aria-label="Citations per year from 2020 to 2026: 5, 20, 39, 55, 108, 240, 208. 2026 is a partial year.">
 <line class="grid" x1="40" y1="138.0" x2="544" y2="138.0"/>
 <text class="ytick" x="32" y="141.5">0</text>
 <line class="grid" x1="40" y1="107.0" x2="544" y2="107.0"/>
@@ -161,21 +168,21 @@
 <text class="xtick" x="220.0" y="154">2022</text>
 <g class="bar"><title>2023: 55 citations</title><rect x="269.0" y="109.6" width="46.0" height="28.4" rx="3"/></g>
 <text class="xtick" x="292.0" y="154">2023</text>
-<g class="bar"><title>2024: 109 citations</title><rect x="341.0" y="81.7" width="46.0" height="56.3" rx="3"/></g>
+<g class="bar"><title>2024: 108 citations</title><rect x="341.0" y="82.2" width="46.0" height="55.8" rx="3"/></g>
 <text class="xtick" x="364.0" y="154">2024</text>
 <g class="bar"><title>2025: 240 citations</title><rect x="413.0" y="14.0" width="46.0" height="124.0" rx="3"/></g>
 <text class="xtick" x="436.0" y="154">2025</text>
 <text class="vlabel" x="436.0" y="8.0">240</text>
-<g class="bar partial"><title>2026: 189 citations (year still in progress)</title><rect x="485.0" y="40.4" width="46.0" height="97.6" rx="3"/></g>
+<g class="bar partial"><title>2026: 208 citations (year still in progress)</title><rect x="485.0" y="30.5" width="46.0" height="107.5" rx="3"/></g>
 <text class="xtick" x="508.0" y="154">2026</text>
-<text class="vlabel partial" x="508.0" y="34.4">189</text>
+<text class="vlabel partial" x="508.0" y="24.5">208</text>
 <line class="axis" x1="40" y1="138" x2="544" y2="138"/>
 </svg>
   <p class="chart-note">Citations per year. 2026 is still in progress, shown in amber.
   Source: <a href="https://scholar.google.com/citations?user=WJMPibgAAAAJ&amp;hl=en">Google
-  Scholar</a>, read 17 October 2026.</p>
+  Scholar</a>, read 9 November 2026.</p>
   <details class="cite-data"><summary>Show the figures as a table</summary>
-    <table><tr><th>Year</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026</th></tr><tr><th>Citations</th><td>5</td><td>20</td><td>39</td><td>55</td><td>109</td><td>240</td><td>189</td></tr></table>
+    <table><tr><th>Year</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026</th></tr><tr><th>Citations</th><td>5</td><td>20</td><td>39</td><td>55</td><td>108</td><td>240</td><td>208</td></tr></table>
   </details>
   <h3>Journal articles</h3>
   <ol class="pubs"><li>Alhindawi, I., Fernandes, J.M., <b class='me'>Sood, D.</b>, O'Donnell, J. and Byrne, M.A. (2026). A longitudinal study of CO<sub>2</sub> and air exchange rate variations in naturally ventilated airtight energy-efficient dwellings. <em>Journal of Building Engineering</em>.</li>
@@ -227,19 +234,20 @@
 <section id="teaching" tabindex="-1">
   <h2>Teaching</h2>
   <p class="lede">I coordinate Energy Systems in Buildings II, a core postgraduate module in
-  mechanical and materials engineering, and I treat changes to it as something to test rather
-  than assert.</p>
+  mechanical and materials engineering. I treat changes to it as something to test rather than
+  assert.</p>
 
   <p>The module runs on a deliberate half-and-half split between lectures and project work.
   Students choose a real building and location, obtain local climate data, model it, and defend a
   retrofit proposal in a presentation where their assumptions are questioned. It builds on
-  thermodynamics, heat transfer, fluid dynamics and psychrometrics, extending into load
+  thermodynamics, heat transfer, fluid dynamics and psychrometrics, and extends into load
   calculation, HVAC design and the thermal performance of building elements.</p>
 
-  <p>I moved the module onto IES VE, an industry-standard platform, so that the skills transfer to
+  <p>Moved the module onto IES VE, an industry-standard platform, so that the skills transfer to
   professional practice and students spend their effort on analysis rather than on fighting the
-  software. I then evaluated the design and its dual-assessment structure and published the
-  findings at the European Conference on Computing in Construction.</p>
+  software. Evaluated the design and its dual-assessment structure, and published the findings at
+  the European Conference on Computing in Construction. <b>Output:</b> a peer-reviewed account of
+  what the assessment structure produced.</p>
 
   <h3>Teaching and supervision</h3>
   <ul class="rows">
@@ -255,9 +263,9 @@
   <p class="lede">The same information as a graph: roles, teaching, projects, outputs and the
   organisations that connect them. Node size follows how connected something is, so the hubs of
   the work emerge on their own.</p>
-  <p>Organisations start hidden so the opening view is the work itself; the Organisation
-  chip brings them back. Hover a node to isolate its neighbourhood, drag to rearrange, or switch
-  to the table. The underlying data is also available as <a href="sood_kg.ttl">RDF Turtle</a>.</p>
+  <p>Organisations start hidden, so the opening view is the work itself. The Organisation chip
+  brings them back. Hover a node to isolate its neighbourhood, drag to rearrange, or switch to
+  the table. The underlying data is also available as <a href="sood_kg.ttl">RDF Turtle</a>.</p>
   <div class="frame"><iframe src="kg.html" title="Interactive knowledge graph" loading="lazy"></iframe></div>
 </section>
 
