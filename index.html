@@ -14,10 +14,11 @@
   <svg id="voronoi" aria-hidden="true"></svg>
   <div class="hero-in">
     <h1>Divyanshu Sood</h1>
-    <p>National energy targets are set in totals. Every heat pump and every car charger,
-       however, connects to a single low-voltage transformer. I build spatial models that
-       identify which of those transformers reach their limit first, which are ageing
-       thermally, and what a planner should do next.</p>
+    <p>I am an energy systems researcher at University College Dublin. National
+       electrification targets are set in totals, but every heat pump and every car charger
+       connects to a single low-voltage transformer. I build spatial models that identify
+       which transformers reach their limit first, which are ageing thermally, and what a
+       planner should do next.</p>
     <div class="hero-where">
       <b>Senior Energy Systems Researcher</b>, UCD Energy Institute &nbsp;·&nbsp;
       <b>Module Coordinator</b>, Energy Systems in Buildings II &nbsp;·&nbsp;
@@ -41,10 +42,10 @@
 
 <section id="overview" class="on" tabindex="-1">
   <h2>Overview</h2>
-  <p class="lede">I am a mechanical engineer working on energy systems at national scale. I
-  build spatially explicit models of the Irish building stock and of the electricity network
-  that serves it. I train and test the machine learning that runs on those models. I also teach
-  the thermodynamics and fluid mechanics underneath them.</p>
+  <p class="lede">I am a Senior Energy Systems Researcher at the UCD Energy Institute, and a
+  mechanical engineer by training. I build spatially explicit models of the Irish building stock
+  and of the electricity network that serves it. I train and test the machine learning that runs
+  on those models. I also teach the thermodynamics and fluid mechanics underneath them.</p>
 
   <p>Two questions run through the work. First, where does a national target actually land?
   Electrification is planned in national totals, but every heat pump and every car charger
@@ -85,7 +86,7 @@
   This cut spurious overload artefacts by 71 per cent against nearest-station assignment, and
   removed every case above 1000 per cent utilisation.</div>
 
-  <h3>Whether a learned model can be trusted on a real network</h3>
+  <h3>Machine learning for overload screening</h3>
   <p>Machine learning is increasingly used to screen distribution networks for overload.
   Whether a model trained on one set of scenarios still holds beyond them is rarely tested.
   Built a benchmark covering 36,997 stations and 128 electrification scenarios, and tested it
@@ -97,14 +98,14 @@
   precision still disagree on 4.5 per cent of overload labels, so part of the uncertainty is
   irreducible without operator data.</div>
 
-  <h3>Recovering what is behind a feeder</h3>
+  <h3>Technology adoption from feeder load</h3>
   <p>Network planning needs to know how many heat pumps, electric vehicles and rooftop solar
   systems sit behind a feeder. In most cases nobody does. Each technology leaves a distinct
   time-frequency signature in the load it draws. This work recovers adoption fractions from a
   single year of aggregate hourly load by separating those signatures, and compares five
   estimators ranging from interpretable dictionaries to neural networks.</p>
 
-  <h3>Cities and towns do not face the same problem</h3>
+  <h3>Urban and rural electrification pathways</h3>
   <p>Electrification targets are set nationally and applied uniformly. The networks they land
   on are not uniform. Ran a glide-path study across two contrasting feeders: a Dublin suburb on
   400 kVA ground-mounted transformers, and a rural town in Co. Leitrim on 50 kVA pole-mounted
@@ -114,25 +115,25 @@
 
   <h3>All projects</h3>
   <ul class="rows">
-    <li><div class="when">2025 to present</div><div class="what"><b>National Energy Digital Twin</b><span>Lead modeller. Links 2.1 million Irish dwellings to approximately 37,000 low-voltage transformer districts and runs electrification scenarios against them. UCD Energy Institute, within the NexSys programme.</span></div></li>
-    <li><div class="when">2025 to present</div><div class="what"><b>Intelligent data harvesting for building stock classification</b><span>My current postdoctoral project, and the stock model the digital twin runs on. Adds non-conventional data sources including computer vision, and validates physics-informed machine learning against certified ratings and metered data.</span></div></li>
-    <li><div class="when">2025 to present</div><div class="what"><b>Station-resolved overload screening: a benchmark</b><span>36,997 stations across 128 adoption scenarios, testing machine learning under both scenario shift and leave-one-county-out geographic shift. Under review, NeurIPS 2026 AI4Grid workshop.</span></div></li>
-    <li><div class="when">2025 to present</div><div class="what"><b>Climate change and Ireland&rsquo;s future electricity system</b><span>A team framework linking climate variables and climate action to future supply, demand and flexibility needs.</span></div></li>
-    <li><div class="when">2025 to present</div><div class="what"><b>Ask NEDT, a language interface to the model</b><span>A prototype that lets non-specialists query the digital twin in plain language, built on retrieval over the model&rsquo;s own outputs.</span></div></li>
-    <li><div class="when">2025 to present</div><div class="what"><b>IEA EBC Annex 95, Human-Centric Buildings</b><span>Ireland representative, contributing across six activities on the role of occupants in the energy transition and climate adaptation.</span></div></li>
-    <li><div class="when">2026</div><div class="what"><b>Knowledge graph for infrastructure overloading</b><span>A linked-data framework integrating building registers, address and census geography and network assets, with traceable provenance. In preparation.</span></div></li>
-    <li><div class="when">2026</div><div class="what"><b>The Last Mile of Net Zero</b><span>Urban against rural electrification glide-paths: a Dublin suburban feeder of 30 stations at 400 kVA median, against a rural town feeder in Co. Leitrim of 27 pole-mounted stations at 50 kVA.</span></div></li>
-    <li><div class="when">2026</div><div class="what"><b>ReserveLens, grid services from data centre batteries</b><span>EU TalentOn, Brest. A decision layer working out how much uninterruptible power supply capacity can be offered as fast frequency reserve without eroding a site&rsquo;s protected backup autonomy.</span></div></li>
-    <li><div class="when">2025 to 2026</div><div class="what"><b>Time-frequency disaggregation of technology adoption</b><span>Recovers heat pump, electric vehicle and rooftop solar adoption from a single year of aggregate hourly feeder load, comparing five estimators. CISP-BMEI 2026.</span></div></li>
-    <li><div class="when">2025 to 2026</div><div class="what"><b>Dual-assessment masters module</b><span>A pedagogic evaluation of the module I lead, covering its design, its split between lectures and project work, and what the assessment structure produced. EC3 2026.</span></div></li>
-    <li><div class="when">2024 to 2025</div><div class="what"><b>Household and transport demand with smart and vehicle-to-home charging</b><span>Roughly 100 scenarios spanning Irish household profiles, optimised under variable tariffs for peak shaving and load shifting, then aggregated to national level.</span></div></li>
-    <li><div class="when">2020 to 2024</div><div class="what"><b>Doctorate: occupancy impacts on energy and indoor environment</b><span>Deterministic and probabilistic occupancy models across spatial and temporal scales, surrogate models replacing expensive simulation, validated against sensors I deployed in occupied homes. SEAI ALIVE Scholarship.</span></div></li>
+    <li><div class="when">2025 to present</div><div class="what"><b>National Energy Digital Twin</b><span>Lead the modelling. Links 2.1 million Irish dwellings to approximately 37,000 low-voltage transformer districts, and runs electrification scenarios against them. UCD Energy Institute, within the NexSys programme.</span></div></li>
+    <li><div class="when">2025 to present</div><div class="what"><b>Intelligent data harvesting for building stock classification</b><span>My current postdoctoral project, and the stock model the digital twin runs on. Adds non-conventional data sources, including computer vision, and validates physics-informed machine learning against certified ratings and metered data.</span></div></li>
+    <li><div class="when">2025 to present</div><div class="what"><b>A benchmark for station-level overload screening</b><span>Benchmarks machine learning across 36,997 stations and 128 adoption scenarios. Tests both scenario shift and leave-one-county-out geographic shift. Under review, NeurIPS 2026 AI4Grid workshop.</span></div></li>
+    <li><div class="when">2025 to present</div><div class="what"><b>Climate change and Ireland&rsquo;s future electricity system</b><span>A team framework linking climate variables and climate action to future electricity supply, demand and flexibility needs.</span></div></li>
+    <li><div class="when">2025 to present</div><div class="what"><b>Ask NEDT: a natural language interface to the digital twin</b><span>Lets non-specialists query the digital twin in plain language. Built on retrieval over the model&rsquo;s own outputs. Prototype.</span></div></li>
+    <li><div class="when">2025 to present</div><div class="what"><b>IEA EBC Annex 95: Human-Centric Buildings</b><span>Ireland representative. Contribute across six activities on the role of occupants in the energy transition and in climate adaptation.</span></div></li>
+    <li><div class="when">2026</div><div class="what"><b>Knowledge graph for infrastructure overloading</b><span>Integrates building registers, address and census geography and network assets into one linked-data framework, with traceable provenance. In preparation.</span></div></li>
+    <li><div class="when">2026</div><div class="what"><b>The Last Mile of Net Zero: urban and rural glide-paths</b><span>Compares electrification pathways on two contrasting feeders: 30 stations at a 400 kVA median in a Dublin suburb, against 27 pole-mounted stations at 50 kVA in a rural town in Co. Leitrim.</span></div></li>
+    <li><div class="when">2026</div><div class="what"><b>ReserveLens: grid services from data centre batteries</b><span>EU TalentOn, Brest. A decision layer that works out how much uninterruptible power supply capacity a data centre can offer as fast frequency reserve without eroding its protected backup autonomy.</span></div></li>
+    <li><div class="when">2025 to 2026</div><div class="what"><b>Time-frequency disaggregation of technology adoption</b><span>Recovers heat pump, electric vehicle and rooftop solar adoption from a single year of aggregate hourly feeder load. Compares five estimators. CISP-BMEI 2026.</span></div></li>
+    <li><div class="when">2025 to 2026</div><div class="what"><b>Design and evaluation of a dual-assessment masters module</b><span>Evaluates the module I coordinate: its design, its split between lectures and project work, and what the assessment structure produced. EC3 2026.</span></div></li>
+    <li><div class="when">2024 to 2025</div><div class="what"><b>Household and transport demand under smart and vehicle-to-home charging</b><span>Optimised roughly 100 Irish household profiles under variable tariffs for peak shaving and load shifting, then aggregated the result to national level.</span></div></li>
+    <li><div class="when">2020 to 2024</div><div class="what"><b>PhD: occupancy effects on energy use and indoor environmental quality</b><span>Built deterministic and probabilistic occupancy models across spatial and temporal scales, and surrogate models to replace expensive simulation. Validated against sensors I deployed in occupied homes. SEAI ALIVE Scholarship.</span></div></li>
     <li><div class="when">2024</div><div class="what"><b>Probabilistic occupancy with Bayesian neural networks</b><span>University College London, academic affiliate. Reached 90 per cent accuracy for night-time occupancy and 64 per cent for daytime, where behaviour varies more.</span></div></li>
     <li><div class="when">2023</div><div class="what"><b>Room-level occupancy simulator</b><span>Technical University of Denmark, guest researcher. Hidden Markov models over Danish time-use data across five room states.</span></div></li>
-    <li><div class="when">2022</div><div class="what"><b>Carbon and sustainability assessment of a housing portfolio</b><span>With the Peter McVerry Trust and ARUP. Operational and embodied carbon across retrofit options; an air source heat pump retrofit moved a case study dwelling from D2 to A3.</span></div></li>
-    <li><div class="when">2021</div><div class="what"><b>Energiesprong whole house retrofit hackathon</b><span>Winning entry. A net zero retrofit for 1970s cross-wall flats using lightweight modular panels that could be assembled on site without a crane.</span></div></li>
-    <li><div class="when">2020</div><div class="what"><b>Energy and buildings research</b><span>Project Associate, The Energy and Resources Institute, New Delhi.</span></div></li>
-    <li><div class="when">2019</div><div class="what"><b>Multi-retrofit building envelope optimisation</b><span>IIT Delhi, junior research fellow. Phase change material and insulation layers in a wall assembly, with a genetic algorithm finding the thicknesses that minimise heat gain.</span></div></li>
+    <li><div class="when">2022</div><div class="what"><b>Carbon and sustainability assessment of a housing portfolio</b><span>With the Peter McVerry Trust and ARUP. Assessed operational and embodied carbon across retrofit options. An air source heat pump retrofit moved the case study dwelling from D2 to A3.</span></div></li>
+    <li><div class="when">2021</div><div class="what"><b>Energiesprong whole house retrofit hackathon</b><span>Winning entry. A net zero retrofit for 1970s cross-wall flats, using lightweight modular panels that can be assembled on site without a crane.</span></div></li>
+    <li><div class="when">2020</div><div class="what"><b>Energy efficiency in buildings</b><span>Project Associate, The Energy and Resources Institute, New Delhi.</span></div></li>
+    <li><div class="when">2019</div><div class="what"><b>Multi-retrofit building envelope optimisation</b><span>IIT Delhi, junior research fellow. Optimised phase change material and insulation thicknesses in a wall assembly with a genetic algorithm, to minimise heat gain.</span></div></li>
     <li><div class="when">2018</div><div class="what"><b>Vacuum insulation panels under a real gas model</b><span>IIT Delhi. Treating the fill gas as real rather than ideal revised the predicted service life down by 15 to 18 per cent.</span></div></li>
     <li><div class="when">2017 to 2019</div><div class="what"><b>Automobile cabin thermal management with phase change material</b><span>M.Tech thesis, TERI School of Advanced Studies.</span></div></li>
     <li><div class="when">2016</div><div class="what"><b>Folding bicycle mechanism</b><span>Indian patent, granted (417194).</span></div></li>
