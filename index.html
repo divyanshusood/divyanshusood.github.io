@@ -34,6 +34,7 @@
   <li><button data-go="publications">Publications</button></li>
   <li><button data-go="teaching">Teaching</button></li>
   <li><button data-go="graph">Knowledge graph</button></li>
+  <li><button data-go="explore">Explore</button></li>
   <li><button data-go="about">Positions &amp; contact</button></li>
 </ol></nav>
 
@@ -270,6 +271,118 @@
   <div class="frame"><iframe src="kg.html" title="Interactive knowledge graph" loading="lazy"></iframe></div>
 </section>
 
+<section id="explore" tabindex="-1">
+  <h2>Explore</h2>
+  <p class="lede">Four small models you can drive yourself. Each one makes a finding from my
+  research playable, so you can see the behaviour rather than read a number for it.</p>
+  <p class="xp-note">These run on representative load profiles chosen to behave like the real
+  thing. They are illustrative and are not output from the National Energy Digital Twin.</p>
+
+  <div class="xp">
+    <h3>1. Transformer challenge</h3>
+    <p>You are planning one low-voltage district: 85 homes on a 400 kVA transformer. Electrify as
+    far as you can without pushing the unit past its rating.</p>
+    <div class="xp-grid">
+      <div class="xp-ctrl">
+        <label for="g1hp"><span>Heat pumps <b data-for="g1hp"></b></span>
+          <input type="range" id="g1hp" min="0" max="100" value="20"></label>
+        <label for="g1ev"><span>Electric vehicles <b data-for="g1ev"></b></span>
+          <input type="range" id="g1ev" min="0" max="100" value="25"></label>
+        <label for="g1pv"><span>Rooftop solar <b data-for="g1pv"></b></span>
+          <input type="range" id="g1pv" min="0" max="100" value="15"></label>
+        <label for="g1re"><span>Retrofit to B2 <b data-for="g1re"></b></span>
+          <input type="range" id="g1re" min="0" max="100" value="10"></label>
+        <label class="xp-check"><input type="checkbox" id="g1smart"> Smart EV charging</label>
+        <label class="xp-check"><input type="checkbox" id="g1season"> Summer day</label>
+      </div>
+      <div>
+        <div class="xp-chart" id="g1chart"></div>
+        <div class="xp-out" id="g1out"></div>
+        <p class="xp-msg" id="g1msg" aria-live="polite"></p>
+      </div>
+    </div>
+    <p class="xp-note">Try reaching 80% heat pumps and 80% electric vehicles. It cannot be done on
+    this station without smart charging, and retrofit buys you more headroom than solar does.</p>
+  </div>
+
+  <div class="xp">
+    <h3>2. Urban against rural</h3>
+    <p>One national electrification target, two very different networks. A Dublin suburb on a
+    400 kVA ground-mounted transformer, against a rural town in Co. Leitrim on a 50 kVA
+    pole-mounted unit. The chart sweeps the target from nothing to full adoption, so you can
+    read off where each network runs out.</p>
+    <div class="xp-grid">
+      <div class="xp-ctrl">
+        <label class="xp-check"><input type="checkbox" id="g2smart"> Smart EV charging</label>
+        <p class="xp-note" style="margin-top:14px">Uptake on the horizontal axis applies the same
+        heat pump and electric vehicle share to both feeders.</p>
+      </div>
+      <div>
+        <div class="xp-chart" id="g2chart"></div>
+        <div class="xp-legend" id="g2legend"></div>
+        <div class="xp-out" id="g2out"></div>
+        <p class="xp-msg" id="g2msg" aria-live="polite"></p>
+      </div>
+    </div>
+    <p class="xp-note">From <b>The Last Mile of Net Zero</b>.</p>
+  </div>
+
+  <div class="xp">
+    <h3>3. Read the load curve</h3>
+    <p>Network planners often need to know what sits behind a feeder, and frequently nobody does.
+    Each technology leaves its own mark on the load. Move the sliders until your dashed curve
+    matches the solid one.</p>
+    <div class="xp-grid">
+      <div class="xp-ctrl">
+        <label for="g3hp"><span>Heat pumps <b data-for="g3hp"></b></span>
+          <input type="range" id="g3hp" min="0" max="80" value="30"></label>
+        <label for="g3ev"><span>Electric vehicles <b data-for="g3ev"></b></span>
+          <input type="range" id="g3ev" min="0" max="80" value="30"></label>
+        <label for="g3pv"><span>Rooftop solar <b data-for="g3pv"></b></span>
+          <input type="range" id="g3pv" min="0" max="80" value="30"></label>
+        <div class="xp-btns">
+          <button type="button" id="g3show">Reveal</button>
+          <button type="button" id="g3new">New curve</button>
+        </div>
+      </div>
+      <div>
+        <div class="xp-chart" id="g3chart"></div>
+        <div class="xp-out" id="g3out"></div>
+        <div class="xp-reveal" id="g3reveal" hidden></div>
+      </div>
+    </div>
+    <p class="xp-note">From my work on time-frequency disaggregation of technology adoption.</p>
+  </div>
+
+  <div class="xp">
+    <h3>4. Power Ireland for a day</h3>
+    <p>Build a generation portfolio and run it against a winter day. Keep the lights on, and try to
+    reach the 80% renewable electricity share targeted for 2030.</p>
+    <div class="xp-grid">
+      <div class="xp-ctrl">
+        <label for="g4w"><span>Wind <b data-for="g4w"></b></span>
+          <input type="range" id="g4w" min="0" max="14" step="0.5" value="5" data-unit=" GW"></label>
+        <label for="g4s"><span>Solar <b data-for="g4s"></b></span>
+          <input type="range" id="g4s" min="0" max="12" step="0.5" value="2" data-unit=" GW"></label>
+        <label for="g4b"><span>Battery <b data-for="g4b"></b></span>
+          <input type="range" id="g4b" min="0" max="4" step="0.25" value="0.5" data-unit=" GW"></label>
+        <label for="g4i"><span>Interconnection <b data-for="g4i"></b></span>
+          <input type="range" id="g4i" min="0" max="2.5" step="0.25" value="0.75" data-unit=" GW"></label>
+        <label for="g4g"><span>Gas <b data-for="g4g"></b></span>
+          <input type="range" id="g4g" min="0" max="6" step="0.25" value="3" data-unit=" GW"></label>
+      </div>
+      <div>
+        <div class="xp-chart" id="g4chart"></div>
+        <div class="xp-legend" id="g4legend"></div>
+        <div class="xp-out" id="g4out"></div>
+        <p class="xp-msg" id="g4msg" aria-live="polite"></p>
+      </div>
+    </div>
+    <p class="xp-note">Battery is sized at four hours of storage. Gas emissions are costed at
+    roughly 0.37 tonnes of CO<sub>2</sub> per MWh, typical of a combined cycle plant.</p>
+  </div>
+</section>
+
 <section id="about" tabindex="-1">
   <h2>Positions &amp; contact</h2>
   <ul class="rows">
@@ -319,4 +432,13 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="assets/site.js"></script>
+<script src="assets/explore.js"></script>
+
+<!-- Visitor counting. GoatCounter is cookieless and stores no personal data, so no
+     consent banner is required. It stays inert until the site code below exists.
+     To switch it on: create a free non-commercial account at https://www.goatcounter.com,
+     choose the site code "divyanshusood", and this line starts counting. Stats are
+     private to you at https://divyanshusood.goatcounter.com -->
+<script data-goatcounter="https://divyanshusood.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body></html>
